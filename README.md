@@ -1,9 +1,9 @@
 # eSample
 Moteur de recherche de samples avec un pad permettant de les jouer simultanément et créer rapidement des rythmes.
 Développé avec [Vue 3](https://vuejs.org/) et [Vite](https://vitejs.dev/).
-## Installation
+## Démarrage de l'app
 1. Avoir installé [Node.js](https://nodejs.org/fr)
-2. Cloner le repository git et installer les dépendances
+2. Cloner localement le repository git
 ```bash
 git clone [https://github.com/davidgalindo-git/eSample.git](https://github.com/davidgalindo-git/eSample.git)
 ```
@@ -13,7 +13,13 @@ cd eSample
 cd e-sample-app
 npm install
 ```
-4. Créer un fichier ".env" au même niveau que "package.json" basé sur le fichier ".env.example" et remplacer les données secrètes.
+4. Créer un fichier ".env" au même niveau que "package.json" basé sur le fichier ".env.example" et remplacer les données secrètes.  
+
+(si pas dans /e-sample-app)
+```bash
+cd e-sample-app
+```
+Création du fichier
 ```bash
 touch .env
 ```
