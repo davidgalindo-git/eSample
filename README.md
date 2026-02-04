@@ -1,4 +1,4 @@
-# eSample
+# eSample (pré-tpi)
 Moteur de recherche de samples avec un pad permettant de les jouer simultanément et créer rapidement des rythmes.
 Développé avec [Vue 3](https://vuejs.org/) et [Vite](https://vitejs.dev/).
 ## Démarrage de l'app
