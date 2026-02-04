@@ -1,18 +1,21 @@
 <script setup>
 import {ref} from 'vue'
+import { useSampleAPI } from '../stores/sampleStore.js'
 
-const input = ref(null)
+const sampleStore = useSampleAPI()
+
 const keyword = ref(null)
 
-function submitKeyword(input) {
-  keyword.value = input
+function submitKeyword(keyword) {
+  sampleStore.searchSamples(keyword)
 }
 </script>
 
 <template>
   <p>Research samples</p>
-  <input v-model="input" placeholder="Insert keyword" @keyup.enter="submitKeyword(input)"/>
+  <input v-model="keyword" placeholder="Insert keyword" @keyup.enter="submitKeyword(keyword)"/>
   <p>{{ keyword }}</p>
+  <p>{{sampleStore.samples}}</p>
 </template>
 
 <style scoped>
