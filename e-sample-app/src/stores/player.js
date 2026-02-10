@@ -15,11 +15,29 @@ export const usePlayer = defineStore("player", {
             if (sample) {
                 this.initAudio()
 
+                if (!sample.previews || !sample.previews['preview-hq-mp3']) {
+                    console.error('No preview available for sample.')
+                }
                 this.audio.src = sample.previews['preview-hq-mp3']
                 this.audio.load()
 
                 this.audio.play();
                 this.playing = true;
+            }
+        },
+
+        pause(){
+          if (this.audio) {
+              this.audio.pause();
+              this.playing = false;
+          }
+        },
+
+        stop(){
+            if (this.audio) {
+                this.audio.pause();
+                this.audio.currentTime = 0;
+                this.playing = false;
             }
         },
 
@@ -40,7 +58,7 @@ export const usePlayer = defineStore("player", {
                 this.playing = false;
             }
 
-            this.audio.onerror = () => {
+            this.audio.onerror = (e) => {
                 console.error("Erreur de lecture audio:", e)
                 this.playing = false;
             }
