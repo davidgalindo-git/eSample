@@ -13,6 +13,13 @@ const player = usePlayer()
 function playSample(sample) {
   player.play(sample)
 }
+function pauseSample() {
+  player.pause()
+}
+
+function stopSample() {
+  player.stop()
+}
 </script>
 
 <template>
