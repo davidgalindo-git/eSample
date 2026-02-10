@@ -5,8 +5,6 @@ const props = defineProps({
     required: true
   }
 })
-
-console.log("Sample reçu:", props.sample)
 </script>
 
 <template>
