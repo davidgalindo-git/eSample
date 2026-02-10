@@ -33,3 +33,13 @@ Build (production)
 ```bash
 npm run build
 ```
+
+## Tests
+Aller dans le répertoire e-sample-app
+```bash
+cd e-sample-app
+```
+Exécuter les tests du dossier src/tests avec Vitest UI
+```bash
+npx vitest --ui
+```
