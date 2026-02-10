@@ -1,14 +1,26 @@
 <script setup>
+import {usePlayer} from "../stores/player.js";
+
 const props = defineProps({
   sample:{
     type: Object,
     required: true
   }
 })
+
+const player = usePlayer()
+
+function playSample(sample) {
+  player.play(sample)
+}
 </script>
 
 <template>
-  <div class="sample-card">
+  <div class="sample-card" v-if="sample">
+    <button
+      @click="playSample(sample)"
+      class="play-button"
+    >▶</button>
     <p class="sample-name">{{ sample.name }}</p>
     <small>ID: {{ sample.id }}</small>
     <span>tags: {{ sample.tags }}</span>
