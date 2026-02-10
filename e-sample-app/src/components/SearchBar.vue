@@ -15,7 +15,7 @@ const submitKeyword = async (keyword) => {
   <p>Research samples</p>
   <input v-model="keyword" placeholder="Insert keyword" @keyup.enter="submitKeyword(keyword)"/>
   <p>keyword: {{ keyword }}</p>
-  <div class="sample-container">
+  <div class="sample-container" v-if="sampleStore.samples.value.length > 0">
     <SampleCard
       v-for="sample in sampleStore.samples.value"
       :key="sample.id"
