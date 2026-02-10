@@ -14,7 +14,7 @@ export const useSampleAPI = () => {
     const searchSamples = async (query) => {
 
         const API_KEY = FREESOUND_API_KEY   // API secret token
-        const url = `${freesoundURL}?query=${query}&token=${API_KEY}`   // URL to fetch
+        const url = `${freesoundURL}?query=${query}&token=${API_KEY}&fields=id,name,tags,previews,username,license`   // URL to fetch, include necessary fields
 
         loading.value = true         // update loading state
         try{
