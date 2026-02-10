@@ -14,15 +14,15 @@ const submitKeyword = async (keyword) => {
 <template>
   <p>Research samples</p>
   <input v-model="keyword" placeholder="Insert keyword" @keyup.enter="submitKeyword(keyword)"/>
-  <p>{{ keyword }}</p>
+  <p>keyword: {{ keyword }}</p>
   <div class="sample-container">
-    <p>nb of samples: {{ sampleStore.samples.value.length }}</p>
     <SampleCard
       v-for="sample in sampleStore.samples.value"
       :key="sample.id"
       :sample="sample"
       />
   </div>
+  <p>nb of samples: {{ sampleStore.samples.value.length }}</p>
 </template>
 
 <style scoped>
