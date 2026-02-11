@@ -22,7 +22,7 @@ const player = usePlayer()
     <div class="sample-info">
       <p class="sample-name">{{ sample.name }}</p>
       <small>ID: {{ sample.id }}</small>
-      <small>by {{ sample.username }}</small>
+      <small> by {{ sample.username }}</small>
     </div>
 
     <div class="tags">
