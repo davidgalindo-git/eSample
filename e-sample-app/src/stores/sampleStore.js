@@ -21,6 +21,7 @@ export const useSampleAPI = () => {
             const res = await fetch(url)    // asynchronous fetch to API
             const data = await res.json()   // store result
             samples.value = data.results         // update samples data
+            console.log('✅ Samples chargés:', samples.value);
         } catch(error) {
             console.error("Search failed: ", error)
         } finally {
