@@ -12,10 +12,6 @@ const sampleStore =useSampleAPI()
     <h1>eSample</h1>
     <SearchBar />
     <SampleContainer :samples="sampleStore.samples.value"/>
-    <div>
-      <p>Debug: {{ sampleStore.samples.length }} samples</p>
-      <pre>{{ sampleStore.samples }}</pre>
-    </div>
   </div>
 </template>
 
