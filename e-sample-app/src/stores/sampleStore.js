@@ -4,12 +4,12 @@ import {ref} from "vue";
 const freesoundURL = `https://freesound.org/apiv2/search/`
 const FREESOUND_API_KEY = import.meta.env.VITE_FREESOUND_API_KEY
 
+// flags and containers init
+const samples = ref([])
+const loading = ref(false)
+
 // API request function management
 export const useSampleAPI = () => {
-    // flags and containers init
-    const samples = ref([])
-    const loading = ref(false)
-
     // sample research with input
     const searchSamples = async (query) => {
 
