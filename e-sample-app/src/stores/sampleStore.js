@@ -4,12 +4,12 @@ import {ref} from "vue";
 const freesoundURL = `https://freesound.org/apiv2/search/`
 const FREESOUND_API_KEY = import.meta.env.VITE_FREESOUND_API_KEY
 
+// flags and containers init
+const samples = ref([])
+const loading = ref(false)
+
 // API request function management
 export const useSampleAPI = () => {
-    // flags and containers init
-    const samples = ref([])
-    const loading = ref(false)
-
     // sample research with input
     const searchSamples = async (query) => {
 
@@ -21,6 +21,7 @@ export const useSampleAPI = () => {
             const res = await fetch(url)    // asynchronous fetch to API
             const data = await res.json()   // store result
             samples.value = data.results         // update samples data
+            console.log('✅ Samples chargés:', samples.value);
         } catch(error) {
             console.error("Search failed: ", error)
         } finally {

@@ -1,5 +1,6 @@
 <script setup>
-import {usePlayer} from "../stores/player.js";
+import { usePlayer } from "../stores/player.js";
+import PlayButton from "./PlayButton.vue";
 
 const props = defineProps({
   sample:{
@@ -9,28 +10,28 @@ const props = defineProps({
 })
 
 const player = usePlayer()
-
-function playSample(sample) {
-  player.play(sample)
-}
-function pauseSample() {
-  player.pause()
-}
-
-function stopSample() {
-  player.stop()
-}
 </script>
 
 <template>
-  <div class="sample-card" v-if="sample">
-    <button
-      @click="playSample(sample)"
-      class="play-button"
-    >▶</button>
-    <p class="sample-name">{{ sample.name }}</p>
-    <small>ID: {{ sample.id }}</small>
-    <span>tags: {{ sample.tags }}</span>
+  <div class="sample-card">
+    <PlayButton
+      :is-playing="player.isPlaying(sample.id)"
+      @click="player.togglePlay(sample)"
+    />
+
+    <div class="sample-info">
+      <p class="sample-name">{{ sample.name }}</p>
+      <small>ID: {{ sample.id }}</small>
+      <small> by {{ sample.username }}</small>
+    </div>
+
+    <div class="tags">
+      <span
+          v-for="tag in sample.tags"
+          :key="tag"
+      >
+        # {{ tag }}</span>
+    </div>
   </div>
 </template>
 
