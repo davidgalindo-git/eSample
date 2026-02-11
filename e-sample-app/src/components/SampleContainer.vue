@@ -12,7 +12,7 @@ console.log("sampleContainer samples:", props.samples)
 </script>
 
 <template>
-    <div>{{samples}}</div>
+  <div v-if="props.samples.length > 0">
     <p>Nb of samples: {{ samples.length }}</p>
     <div class="sample-container">
       <SampleCard
@@ -21,6 +21,7 @@ console.log("sampleContainer samples:", props.samples)
           :sample="sample"
       />
     </div>
+  </div>
 </template>
 
 <style scoped>
