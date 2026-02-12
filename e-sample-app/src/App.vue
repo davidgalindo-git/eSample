@@ -3,6 +3,7 @@ import {useSampleAPI} from "./stores/sampleStore.js";
 
 import SearchBar from "./components/SearchBar.vue";
 import SampleContainer from "./components/SampleContainer.vue";
+import {useLiked} from "./stores/likedStore.js";
 
 const sampleStore =useSampleAPI()
 </script>
@@ -11,6 +12,7 @@ const sampleStore =useSampleAPI()
   <div id="app">
     <h1>eSample</h1>
     <SearchBar />
+    <p>Liked samples: {{ useLiked()}}</p>
     <SampleContainer :samples="sampleStore.samples.value"/>
   </div>
 </template>
