@@ -1,7 +1,8 @@
 <script setup>
+import {onMounted, watch} from "vue";
+
 import {useLiked} from "../stores/likedStore.js";
 import {useSampleAPI} from "../stores/sampleStore.js";
-import {onMounted, watch} from "vue";
 
 import SampleContainer from "./SampleContainer.vue";
 
@@ -20,9 +21,11 @@ watch(() => liked.likedList, (newList) => {
 </script>
 
 <template>
+<div>
   <p>Liked samples: {{ liked.likedList.length }} {{ liked.likedList }}</p>
   <SampleContainer :samples="sampleStore.likedSamples.value"/>
-</template>
+</div>
+ </template>
 
 <style scoped>
 
