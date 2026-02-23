@@ -13,7 +13,6 @@ console.log("sampleContainer samples:", props.samples)
 
 <template>
   <div v-if="props.samples.length > 0">
-    <p>Nb of samples: {{ samples.length }}</p>
     <div class="sample-container">
       <SampleCard
           v-for="sample in samples"

@@ -6,22 +6,22 @@ const FREESOUND_API_KEY = import.meta.env.VITE_FREESOUND_API_KEY
 
 // flags and containers init
 const samples = ref([])
+const likedSamples = ref([])
 const loading = ref(false)
 
 // API request function management
 export const useSampleAPI = () => {
     // sample research with input
     const searchSamples = async (query) => {
-
-        const API_KEY = FREESOUND_API_KEY   // API secret token
-        const url = `${freesoundURL}?query=${query}&token=${API_KEY}&fields=id,name,tags,previews,username,license`   // URL to fetch, include necessary fields
+        // build URL : freesound URL + query + token + return fields
+        const url = `${freesoundURL}?query=${query}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
 
         loading.value = true         // update loading state
         try{
             const res = await fetch(url)    // asynchronous fetch to API
             const data = await res.json()   // store result
             samples.value = data.results         // update samples data
-            console.log('✅ Samples chargés:', samples.value);
+            console.log("Samples loaded:", samples.value);
         } catch(error) {
             console.error("Search failed: ", error)
         } finally {
@@ -29,6 +29,33 @@ export const useSampleAPI = () => {
         }
     }
 
-    return { samples, loading, searchSamples }
+    const searchLikedSamples = async (likedList) => {
+        loading.value = true
+        try{
+            const fetchPromises = likedList.map(async (id)=> {
+                // URL with query containing sample ID
+                const url = `${freesoundURL}?query=${id}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
+                const res = await fetch(url)
+                const data = await res.json()
+
+                // return only first result or null if no sample is found
+                return data.results && data.results.length > 0 ? data.results[0] : null
+            })
+
+            // wait for all fetch promises to be finished
+            const results = await Promise.all(fetchPromises)
+
+            // assign data to container and filter null values
+            likedSamples.value= results.filter(sample => sample !== null)
+
+            console.log("Liked samples loaded:", likedSamples.value);
+        } catch(error) {
+            console.error("Liked samples search failed: ", error)
+        } finally {
+            loading.value = false        // update loading state
+        }
+    }
+
+    return { samples, likedSamples, loading, searchSamples, searchLikedSamples }
 }
 
