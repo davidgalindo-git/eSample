@@ -21,7 +21,10 @@ const player = usePlayer()
           @click="player.togglePlay(sample)"
       />
       <p class="sample-name">{{ sample.name }}</p>
-      <LikeButton :sample-id="sample.id" />
+      <div>
+        <LikeButton :sample-id="sample.id" />
+        <DownloadButton :sample-id="sample.id" />
+      </div>
     </div>
 
     <div class="sample-bottom">
