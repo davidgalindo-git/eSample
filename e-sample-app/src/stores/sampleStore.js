@@ -33,8 +33,8 @@ export const useSampleAPI = () => {
         loading.value = true
         try{
             const fetchPromises = likedList.map(async (id)=> {
-                // URL with query containing sample ID
-                const url = `${freesoundURL}?query=${id}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
+                // URL with search query containing sample ID
+                const url = `${freesoundURL}search/?query=${id}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
                 const res = await fetch(url)
                 const data = await res.json()
 
