@@ -75,9 +75,30 @@ export const useSampleAPI = () => {
                     'Authorization': `Bearer ${fsToken}`
                 }
             })
-            const data = await res.json()
-            
-            console.log("Sample downloaded:", data)
+
+            // convert audio data to blob: Binary Large Object
+            const blob = await res.blob()
+
+            // create temporary url to stock large audio file
+            const blobUrl = window.URL.createObjectURL(blob);
+
+            // create invisible temporary link that references to audio url
+            const link = document.createElement('a');
+            link.href = blobUrl;
+
+            // download attribute forces download request instead of web navigation
+            link.download = `freesound-${sampleId}.wav`; // set audio file name
+
+            // inject link inside web page
+            document.body.appendChild(link);
+            // click download link
+            link.click()
+
+            // clean browser memory
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(blobUrl);
+
+            console.log("Sample downloaded")
         } catch (error) {
             console.error("Download failed: ", error)
         } finally {
