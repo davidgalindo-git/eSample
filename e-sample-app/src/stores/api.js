@@ -1,7 +1,8 @@
 export const useFreesoundAuth = () => {
     // freesound API vars
     const freesoundURL = `https://freesound.org/apiv2/`
-    const id = import.meta.env.VITE_FREESOUND_CLIENT_ID;
+    const client_id = import.meta.env.VITE_FREESOUND_CLIENT_ID;
+    const client_secret = import.meta.env.VITE_FREESOUND_CLIENT_SECRET;
 
     // freesound user login function
     const login = () => {
