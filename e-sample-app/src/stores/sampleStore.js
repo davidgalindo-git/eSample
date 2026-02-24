@@ -78,6 +78,8 @@ export const useSampleAPI = () => {
             console.log("Sample downloaded:", data)
         } catch (error) {
             console.error("Download failed: ", error)
+        } finally {
+            loading.value = false        // update loading state
         }
     }
 
