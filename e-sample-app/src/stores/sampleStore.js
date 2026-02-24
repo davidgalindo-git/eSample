@@ -63,6 +63,7 @@ export const useSampleAPI = () => {
             const url = `${freesoundURL}sounds/${sampleId}/download/`
             const fsToken = localStorage.getItem("fs_token")
 
+            // raise error if token hasn't been claimed
             if (!fsToken) {
                 console.error("Could not find freesound token, get a token by clicking on ''")
             }
