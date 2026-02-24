@@ -61,6 +61,12 @@ export const useSampleAPI = () => {
         try {
             // URL with download query containing sample ID
             const url = `${freesoundURL}sounds/${sampleId}/download/`
+            const fsToken = localStorage.getItem("fs_token")
+
+            if (!fsToken) {
+                console.error("Could not find freesound token, get a token by clicking on ''")
+            }
+
             const res = await fetch(url, {
                 method: "GET",
                 headers: {
