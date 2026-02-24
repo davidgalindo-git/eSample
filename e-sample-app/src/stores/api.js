@@ -42,5 +42,5 @@ export const useFreesoundAuth = () => {
         console.log("localStorage.fs_token: ", localStorage.getItem("fs_token")); // DEBUG
 
     }
-    return {login};
+    return {login, getToken};
 }
