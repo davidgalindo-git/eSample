@@ -10,8 +10,8 @@ const liked = useLiked();
 
 <template>
   <button
-      @click.stop="liked.toggleLike(sampleId)"
-      :class="{ 'is-liked': liked.isLiked(sampleId) }"
+      @click.stop="liked.toggleLike(props.sampleId)"
+      :class="{ 'is-liked': liked.isLiked(props.sampleId) }"
   >
     {{ liked.isLiked(sampleId) ? '❤️' : '🤍' }}
   </button>
