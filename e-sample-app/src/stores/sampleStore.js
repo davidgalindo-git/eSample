@@ -67,6 +67,7 @@ export const useSampleAPI = () => {
                 console.error("Could not find freesound token, get a token by clicking on ''")
             }
 
+            // fetch download url with user's auth token as header
             const res = await fetch(url, {
                 method: "GET",
                 headers: {
