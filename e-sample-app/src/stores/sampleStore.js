@@ -2,7 +2,7 @@ import {ref} from "vue";
 
 // freesound API vars
 const freesoundURL = `https://freesound.org/apiv2/`
-const FREESOUND_API_KEY = import.meta.env.VITE_FREESOUND_API_KEY
+const FREESOUND_API_KEY = import.meta.env.VITE_FREESOUND_CLIENT_SECRET
 
 // flags and containers init
 const samples = ref([])
