@@ -7,6 +7,7 @@ import SearchBar from "./components/SearchBar.vue";
 import SampleContainer from "./components/SampleContainer.vue";
 import LikedSamplesList from "./components/LikedSamplesList.vue";
 import ShowLikesButton from "./components/ShowLikesButton.vue";
+import FreesoundLoginButton from "./components/FreesoundLoginButton.vue";
 
 const sampleStore =useSampleAPI()
 
