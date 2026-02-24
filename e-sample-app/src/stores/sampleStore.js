@@ -13,8 +13,8 @@ const loading = ref(false)
 export const useSampleAPI = () => {
     // sample research with input
     const searchSamples = async (query) => {
-        // build URL : freesound URL + query + token + return fields
-        const url = `${freesoundURL}?query=${query}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
+        // build URL : freesound URL + search + query + token + return fields
+        const url = `${freesoundURL}search/?query=${query}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
 
         loading.value = true         // update loading state
         try{
