@@ -56,6 +56,20 @@ export const useSampleAPI = () => {
         }
     }
 
-    return { samples, likedSamples, loading, searchSamples, searchLikedSamples }
+    const downloadSample = async (sampleId) => {
+        loading.value = true
+        try {
+            // URL with download query containing sample ID
+            const url = `${freesoundURL}sounds/${sampleId}/download/`
+            const res = await fetch(url)
+            const data = await res.json()
+            
+            console.log("Sample downloaded:", data)
+        } catch (error) {
+            console.error("Download failed: ", error)
+        }
+    }
+
+    return { samples, likedSamples, loading, searchSamples, searchLikedSamples, downloadSample }
 }
 
