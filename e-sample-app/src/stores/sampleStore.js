@@ -61,7 +61,12 @@ export const useSampleAPI = () => {
         try {
             // URL with download query containing sample ID
             const url = `${freesoundURL}sounds/${sampleId}/download/`
-            const res = await fetch(url)
+            const res = await fetch(url, {
+                method: "GET",
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            })
             const data = await res.json()
             
             console.log("Sample downloaded:", data)
