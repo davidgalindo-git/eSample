@@ -20,6 +20,7 @@ const toggleLikes = (value) => {
 
 <template>
   <div id="app">
+    <FreesoundLoginButton />
     <h1>eSample</h1>
     <SearchBar />
     <ShowLikesButton :is-visible="isVisible" @toggle-display="toggleLikes"/>
