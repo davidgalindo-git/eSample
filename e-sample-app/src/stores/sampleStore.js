@@ -1,10 +1,11 @@
 import {ref} from "vue";
+import {useFreesoundAuth} from "./api.js";
 
-// freesound API vars
-const freesoundURL = `https://freesound.org/apiv2/`
-const FREESOUND_API_KEY = import.meta.env.VITE_FREESOUND_CLIENT_SECRET
+// local flags and containers init
+const freesoundAuth = useFreesoundAuth();
+const freesoundURL = freesoundAuth.freesoundURL;
+const FREESOUND_API_KEY = freesoundAuth.client_secret;
 
-// flags and containers init
 const samples = ref([])
 const likedSamples = ref([])
 const loading = ref(false)
@@ -21,7 +22,7 @@ export const useSampleAPI = () => {
             const res = await fetch(url)    // asynchronous fetch to API
             const data = await res.json()   // store result
             samples.value = data.results         // update samples data
-            console.log("Samples loaded:", samples.value);
+            console.log("Samples loaded:", samples.value); // DEBUG
         } catch(error) {
             console.error("Search failed: ", error)
         } finally {
@@ -48,7 +49,7 @@ export const useSampleAPI = () => {
             // assign data to container and filter null values
             likedSamples.value= results.filter(sample => sample !== null)
 
-            console.log("Liked samples loaded:", likedSamples.value);
+            console.log("Liked samples loaded:", likedSamples.value); // DEBUG
         } catch(error) {
             console.error("Liked samples search failed: ", error)
         } finally {
