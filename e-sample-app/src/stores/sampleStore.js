@@ -70,7 +70,7 @@ export const useSampleAPI = () => {
             const res = await fetch(url, {
                 method: "GET",
                 headers: {
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${fsToken}`
                 }
             })
             const data = await res.json()
