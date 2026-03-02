@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@vue/test-utils": "^2.4.6",
+    "primeicons": "^7.0.0",
     "pinia": "^3.0.4",
     "tone": "^15.1.22",
     "vitest": "^4.0.18",

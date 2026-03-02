@@ -2,6 +2,7 @@
 import { usePlayer } from "../stores/player.js";
 import PlayButton from "./PlayButton.vue";
 import LikeButton from "./LikeButton.vue";
+import DownloadButton from "./DownloadButton.vue";
 
 const props = defineProps({
   sample:{
@@ -21,7 +22,10 @@ const player = usePlayer()
           @click="player.togglePlay(sample)"
       />
       <p class="sample-name">{{ sample.name }}</p>
-      <LikeButton :sample-id="sample.id" />
+      <div>
+        <LikeButton :sample-id="sample.id" />
+        <DownloadButton :sample-id="sample.id" />
+      </div>
     </div>
 
     <div class="sample-bottom">
