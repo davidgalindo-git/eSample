@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, vi } from 'vitest'
-import SearchBar from '../components/SearchBar.vue'
+import SearchBar from '../components/search/SearchBar.vue'
 
 vi.mock('../stores/sampleStore.js', () => ({
     useSampleAPI: () => ({
