@@ -14,23 +14,29 @@ export const usePadStore = defineStore('pads', () => {
 
     const loadDefaultKit = async () => {
         const defaultSamples = [
-            {index: 0, id: 704245, name: "Kick"},
-            {index: 1, id: 517297, name: "Snare"},
-            {index: 2, id: 363203, name: "Hi-Hat"}
+            {index: 6, id: 704245, name: "Kick"},
+            {index: 7, id: 517297, name: "Snare"},
+            {index: 8, id: 363203, name: "Hi-Hat"}
         ];
 
         try {
             const promises = defaultSamples.map(async (item) => {
+                if (item.index === null || item.index === undefined) return null
+
                 const url = `${auth.freesoundURL}sounds/${item.id}/?token=${auth.client_secret}&fields=id,name,previews`
                 const res = await fetch(url);
                 const data = await res.json()
+
+                if (!res.ok) return null;
+
                 return {
                     index: item.index,
                     sample: data
                 }
             })
 
-            assignedPads.value = await Promise.all(promises);
+            const results = await Promise.all(promises);
+            assignedPads.value = results.filter(r => r !== null);
             console.log("Default kit loaded with previews", assignedPads.value);
 
         } catch (error) {
