@@ -13,11 +13,21 @@ const props = defineProps({
 })
 
 const hasSample = computed(() => props.sample !== null)
+
+const playPreview = () => {
+  if (hasSample.value && props.sample.previews) {
+    const audioUrl = props.sample.previews['preview-lq-mp3']
+    const audio = new Audio(audioUrl)
+
+    audio.play().catch(err => console.error("Erreur de lecture", err))
+  }
+}
 </script>
 
 <template>
   <div class="pad"
        :class="{ 'is-active': hasSample }"
+       @mousedown="playPreview"
   >
     <span class="pad-label">{{ index + 1 }}</span>
     <div v-if="hasSample" class="sample-info">
