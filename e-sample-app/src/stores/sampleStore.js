@@ -66,7 +66,8 @@ export const useSampleAPI = () => {
 
             // raise error if token hasn't been claimed
             if (!fsToken) {
-                console.error("Could not find freesound token, get a token by clicking on ''")
+                console.error("Could not find freesound token, get a token by clicking on 'Get a Freesound Token'")
+                return
             }
 
             // fetch download url with user's auth token as header
@@ -76,6 +77,10 @@ export const useSampleAPI = () => {
                     'Authorization': `Bearer ${fsToken}`
                 }
             })
+
+            if (res.status === 401) {
+                throw new Error("Token expiré ou invalide (401)");
+            }
 
             // convert audio data to blob: Binary Large Object
             const blob = await res.blob()
