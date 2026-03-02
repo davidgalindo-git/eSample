@@ -1,8 +1,8 @@
 <script setup>
 import { usePlayer } from "../stores/player.js";
 import PlayButton from "./PlayButton.vue";
-import LikeButton from "./LikeButton.vue";
-import DownloadButton from "./DownloadButton.vue";
+import LikeButton from "./like/LikeButton.vue";
+import DownloadButton from "./download/DownloadButton.vue";
 
 const props = defineProps({
   sample:{
