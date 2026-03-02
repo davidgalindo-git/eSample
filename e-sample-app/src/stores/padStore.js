@@ -3,6 +3,8 @@ import {ref} from "vue";
 import {useFreesoundAuth} from "./api.js";
 
 export const usePadStore = defineStore('pads', () => {
+    const auth = useFreesoundAuth();
+
     const assignedPads = ref([])
 
     const assignSampleToPad = (sample, index) => {
@@ -19,7 +21,7 @@ export const usePadStore = defineStore('pads', () => {
 
         try {
             const promises = defaultSamples.map(async (item) => {
-                const url = `${useFreesoundAuth.freesoundURL}/sounds/${item.id}/?token=${useFreesoundAuth.client_secret}&fields=id,name,previews`
+                const url = `${auth.freesoundURL}sounds/${item.id}/?token=${auth.client_secret}&fields=id,name,previews`
                 const res = await fetch(url);
                 const data = await res.json()
                 return {
