@@ -20,6 +20,9 @@ const playPreview = () => {
     const audio = new Audio(audioUrl)
 
     audio.play().catch(err => console.error("Erreur de lecture", err))
+    console.log("Playing: ", audioUrl)
+  } else {
+    console.error("No sample assigned to pad #", props.index + 1)
   }
 }
 </script>
