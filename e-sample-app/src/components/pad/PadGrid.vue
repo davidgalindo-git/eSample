@@ -20,7 +20,8 @@ const getPadIndex = (i) => {
 }
 
 const getPadSample = (index) => {
-  return props.pads.find(p => p.index === index) || null
+  const foundSample = props.pads.find(p => Number(p.index) === Number(index)) || null
+  return foundSample ? foundSample.sample : null
 }
 </script>
 
@@ -30,7 +31,10 @@ const getPadSample = (index) => {
          v-for="i in totalPads"
          :key="getPadIndex(i)"
     >
-      <Pad :sample="getPadSample(getPadIndex(i))" :index="getPadIndex(i)"/>
+      <Pad
+          :sample="getPadSample(getPadIndex(i))"
+          :index="getPadIndex(i)"
+      />
     </div>
   </div>
 </template>
