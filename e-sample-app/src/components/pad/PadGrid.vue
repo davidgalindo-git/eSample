@@ -18,6 +18,10 @@ const getPadIndex = (i) => {
 
   return (2 - row) * 3 + col
 }
+
+const getPadSample = (index) => {
+  return props.pads.find(p => p.index === index) || null
+}
 </script>
 
 <template>
