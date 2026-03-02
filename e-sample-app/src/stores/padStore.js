@@ -36,7 +36,5 @@ export const usePadStore = defineStore('pads', () => {
         }
     };
 
-    loadDefaultKit();
-
     return { assignedPads, assignSampleToPad, loadDefaultKit };
 })
