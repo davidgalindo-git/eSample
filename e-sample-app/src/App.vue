@@ -9,6 +9,7 @@ import LikedSamplesList from "./components/like/LikedSamplesList.vue";
 import ShowLikesButton from "./components/like/ShowLikesButton.vue";
 import FreesoundLoginButton from "./components/download/FreesoundLoginButton.vue";
 import PadGrid from "./components/pad/PadGrid.vue";
+import {usePadStore} from "./stores/padStore.js";
 
 const sampleStore =useSampleAPI()
 const padStore = usePadStore()
