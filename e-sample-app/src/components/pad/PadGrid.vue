@@ -25,14 +25,14 @@ const getPadSample = (index) => {
 </script>
 
 <template>
-<div class="pad-grid">
-  <div class="pad-wrapper"
-       v-for="i in totalPads"
-       :key="getPadIndex(i)"
-  >
-    <Pad sample="" :index="getPadIndex(i)"/>
+  <div class="pad-grid">
+    <div class="pad-wrapper"
+         v-for="i in totalPads"
+         :key="getPadIndex(i)"
+    >
+      <Pad :sample="getPadSample(getPadIndex(i))" :index="getPadIndex(i)"/>
+    </div>
   </div>
-</div>
 </template>
 
 <style scoped>
