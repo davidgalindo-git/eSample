@@ -1,4 +1,6 @@
 <script setup>
+import {computed} from "vue";
+
 const props = defineProps({
   sample: {
     type: Object,
@@ -10,17 +12,68 @@ const props = defineProps({
   }
 })
 
+const hasSample = computed(() => props.sample !== null)
 </script>
 
 <template>
-  <div class="pad">
+  <div class="pad"
+       :class="{ 'is-active': hasSample }"
+  >
     <span class="pad-label">{{ index + 1 }}</span>
-    <div class="sample-info">
+    <div v-if="hasSample" class="sample-info">
       <p class="sample-name">{{ sample.name }}</p>
     </div>
+    <div v-else class="empty-slot">+</div>
   </div>
 </template>
 
 <style scoped>
+.pad {
+  width: 100%;
+  height: 100%;
+  background-color: #2c2c2c;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid #1a1a1a;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 4px 6px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
 
+.pad.is-active {
+  background-color: #444;
+  border-color: #00d1b2; /* Couleur Freesound ou autre */
+  box-shadow: inset 0 0 15px rgba(0, 209, 178, 0.2);
+}
+
+.pad:active {
+  transform: scale(0.95);
+  box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.pad-label {
+  position: absolute;
+  top: 5px;
+  left: 8px;
+  font-size: 0.7rem;
+  color: #666;
+  font-weight: bold;
+}
+
+.sample-name {
+  font-size: 0.6rem;
+  text-align: center;
+  padding: 5px;
+  color: #eee;
+  word-break: break-all;
+}
+
+.empty-slot {
+  color: #444;
+  font-size: 1.5rem;
+}
 </style>
