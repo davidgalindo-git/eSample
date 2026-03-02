@@ -1,8 +1,11 @@
+import {ref} from "vue";
+
 export const useFreesoundAuth = () => {
     // freesound API vars
     const freesoundURL = `https://freesound.org/apiv2/`
     const client_id = import.meta.env.VITE_FREESOUND_CLIENT_ID;
     const client_secret = import.meta.env.VITE_FREESOUND_CLIENT_SECRET;
+    const token = ref(localStorage.getItem("fs_token"));
 
     // freesound user login function
     const login = () => {
@@ -31,10 +34,11 @@ export const useFreesoundAuth = () => {
             if (data.access_token) {
                 console.log("access_token: ", data.access_token) // DEBUG
                 // stock access token in local storage
-                accessToken.value = data.access_token;
                 localStorage.setItem("fs_token", data.access_token);
 
                 localStorage.setItem("fs_refresh_token", data.refresh_token);
+
+                token.value = data.access_token;
 
                 window.history.replaceState({}, "", "/");
             }
@@ -42,5 +46,5 @@ export const useFreesoundAuth = () => {
         console.log("localStorage.fs_token: ", localStorage.getItem("fs_token")); // DEBUG
 
     }
-    return {login, getToken, freesoundURL, client_id, client_secret};
+    return {login, getToken, freesoundURL, client_id, client_secret, token};
 }
