@@ -3,11 +3,12 @@ import {ref} from "vue";
 
 import {useSampleAPI} from "./stores/sampleStore.js";
 
-import SearchBar from "./components/SearchBar.vue";
+import SearchBar from "./components/search/SearchBar.vue";
 import SampleContainer from "./components/SampleContainer.vue";
-import LikedSamplesList from "./components/LikedSamplesList.vue";
-import ShowLikesButton from "./components/ShowLikesButton.vue";
-import FreesoundLoginButton from "./components/FreesoundLoginButton.vue";
+import LikedSamplesList from "./components/like/LikedSamplesList.vue";
+import ShowLikesButton from "./components/like/ShowLikesButton.vue";
+import FreesoundLoginButton from "./components/download/FreesoundLoginButton.vue";
+import PadGrid from "./components/pad/PadGrid.vue";
 
 const sampleStore =useSampleAPI()
 
@@ -23,6 +24,7 @@ const toggleLikes = (value) => {
     <FreesoundLoginButton />
     <h1>eSample</h1>
     <SearchBar />
+    <PadGrid :pads="[]"/>
     <ShowLikesButton :is-visible="isVisible" @toggle-display="toggleLikes"/>
     <LikedSamplesList v-show="isVisible"/>
     <p>Nb of samples: {{ sampleStore.samples.value.length }}</p>
