@@ -1,7 +1,7 @@
 <script setup>
 import {onMounted} from "vue";
 
-import {useFreesoundAuth} from "../stores/api.js";
+import {useFreesoundAuth} from "../../stores/api.js";
 
 const freesoundAuth = useFreesoundAuth()
 

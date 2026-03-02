@@ -1,5 +1,5 @@
 <script setup>
-import { useLiked } from "../stores/likedStore.js";
+import { useLiked } from "../../stores/likedStore.js";
 
 const props = defineProps({
   sampleId: { type: [String, Number], required: true }

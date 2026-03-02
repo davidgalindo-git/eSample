@@ -1,5 +1,5 @@
 <script setup>
-import {useSampleAPI} from "../stores/sampleStore.js";
+import {useSampleAPI} from "../../stores/sampleStore.js";
 
 const sampleStore =useSampleAPI()
 

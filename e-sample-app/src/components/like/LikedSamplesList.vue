@@ -1,10 +1,10 @@
 <script setup>
 import {onMounted, watch} from "vue";
 
-import {useLiked} from "../stores/likedStore.js";
-import {useSampleAPI} from "../stores/sampleStore.js";
+import {useLiked} from "../../stores/likedStore.js";
+import {useSampleAPI} from "../../stores/sampleStore.js";
 
-import SampleContainer from "./SampleContainer.vue";
+import SampleContainer from "../SampleContainer.vue";
 
 const liked = useLiked();
 const sampleStore = useSampleAPI();

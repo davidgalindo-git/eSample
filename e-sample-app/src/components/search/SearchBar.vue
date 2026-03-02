@@ -1,6 +1,6 @@
 <script setup>
 import {ref} from 'vue'
-import { useSampleAPI } from '../stores/sampleStore.js'
+import { useSampleAPI } from '../../stores/sampleStore.js'
 
 const sampleStore = useSampleAPI()
 const keyword = ref('')
