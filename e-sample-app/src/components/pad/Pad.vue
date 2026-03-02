@@ -1,5 +1,5 @@
 <script setup>
-import {computed} from "vue";
+import {computed, onMounted, watch} from "vue";
 
 const props = defineProps({
   sample: {
@@ -25,6 +25,12 @@ const playPreview = () => {
     console.error("No sample assigned to pad #", props.index + 1)
   }
 }
+
+watch(() => props.sample, (newSample) => {
+  if (newSample) {
+    console.log(`Pad #${props.index} got sample :`, newSample.name);
+  }
+});
 </script>
 
 <template>
@@ -59,8 +65,7 @@ const playPreview = () => {
 
 .pad.is-active {
   background-color: #444;
-  border-color: #00d1b2; /* Couleur Freesound ou autre */
-  box-shadow: inset 0 0 15px rgba(0, 209, 178, 0.2);
+  border-color: #2f3c36;
 }
 
 .pad:active {
