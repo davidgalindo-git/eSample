@@ -28,7 +28,7 @@ export const usePadStore = defineStore('pads', () => {
             sample: sample,
             alias: alias
         });
-    }
+        console.log(`Pad ${index} succesfully binded :`, alias || sample.name);    }
 
     const loadDefaultKit = async () => {
         const defaultSamples = [
