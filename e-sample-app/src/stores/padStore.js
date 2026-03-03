@@ -21,6 +21,10 @@ export const usePadStore = defineStore('pads', () => {
         return assignedPads.value.find(p => Number(p.index) === Number(logicIndex)) || null
     }
 
+    const saveToLocalStorage = () => {
+        localStorage.setItem("assignedPads", JSON.stringify(assignedPads.value))
+    }
+
     const assignSampleToPad = (sample, index, newAlias) => {
         assignedPads.value = assignedPads.value.filter(pad => pad.index !== index);
         const alias = newAlias || sample.name
