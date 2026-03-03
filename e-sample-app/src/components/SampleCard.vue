@@ -3,6 +3,9 @@ import { usePlayer } from "../stores/player.js";
 import PlayButton from "./PlayButton.vue";
 import LikeButton from "./like/LikeButton.vue";
 import DownloadButton from "./download/DownloadButton.vue";
+import BindPadButton from "./pad/BindPadButton.vue";
+import BindPadPopUp from "./pad/BindPadPopUp.vue";
+import {ref} from "vue";
 
 const props = defineProps({
   sample:{
@@ -12,6 +15,12 @@ const props = defineProps({
 })
 
 const player = usePlayer()
+
+const isPadPopUp = ref(false)
+
+const handlePadPopUp = () => {
+  isPadPopUp.value = !isPadPopUp.value
+}
 </script>
 
 <template>
@@ -22,7 +31,16 @@ const player = usePlayer()
           @click="player.togglePlay(sample)"
       />
       <p class="sample-name">{{ sample.name }}</p>
-      <div>
+      <div class="actions-container">
+        <BindPadPopUp
+            v-if="isPadPopUp"
+            :sample="sample"
+            @close-pop-up="handlePadPopUp"
+        />
+        <BindPadButton
+            :is-pad-pop-up="isPadPopUp"
+            @toggle-pad-pop-up="handlePadPopUp"
+        />
         <LikeButton :sample-id="sample.id" />
         <DownloadButton :sample-id="sample.id" />
       </div>
@@ -62,6 +80,12 @@ const player = usePlayer()
   font-weight: bold;
   font-size: 1rem;
   margin-bottom: 10px;
+}
+.actions-container {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
 </style>

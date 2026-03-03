@@ -110,8 +110,19 @@ export const useSampleAPI = () => {
         } finally {
             loading.value = false        // update loading state
         }
-    }
+    },
 
-    return { samples, likedSamples, loading, searchSamples, searchLikedSamples, downloadSample }
+    getPreviewUrl = async (sampleId) => {
+        const url = `${freesoundURL}sounds/${sampleId}/?token=${FREESOUND_API_KEY}&fields=previews`
+
+        try {
+            const res = await fetch(url)
+            const data = await res.json()
+            return data.previews['preview-lq-mp3']
+        } catch(error) {
+            console.error("Sample fetch preview error: ", error)
+        }
+    }
+    return { samples, likedSamples, loading, searchSamples, searchLikedSamples, downloadSample, getPreviewUrl }
 }
 
