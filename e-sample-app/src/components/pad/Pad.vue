@@ -23,7 +23,7 @@ const playPreview = () => {
     const audioUrl = props.sample.previews['preview-lq-mp3']
     const audio = new Audio(audioUrl)
 
-    audio.play().catch(err => console.error("Erreur de lecture", err))
+    audio.play().catch(err => console.error("Play preview error", err))
     console.log("Playing: ", audioUrl)
   } else {
     console.error("No sample assigned to pad #", props.index + 1)
