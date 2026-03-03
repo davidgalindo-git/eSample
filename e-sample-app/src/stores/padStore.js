@@ -71,6 +71,8 @@ export const usePadStore = defineStore('pads', () => {
 
             const results = await Promise.all(promises);
             assignedPads.value = results.filter(r => r !== null);
+
+            saveToLocalStorage()
             console.log("Default kit loaded with previews", assignedPads.value);
         } catch (error) {
             console.log("Failed to load default kit", error);
