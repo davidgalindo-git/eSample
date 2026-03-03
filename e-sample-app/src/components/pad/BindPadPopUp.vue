@@ -78,4 +78,14 @@ const handleAssign = (visualPos) => {
   border-color: #00d1b2;
 }
 
+.mini-pad.is-occupied {
+  border-color: #555;
+  color: #555;
+  background: #1a1a1a;
+}
+
+.mini-pad.is-occupied:hover {
+  border-color: #ff4444;
+  color: #ff4444;
+}
 </style>
