@@ -32,6 +32,7 @@ console.log("Pad container pads:", padStore.assignedPads)
   width: 100%;
   max-width: 500px;
   aspect-ratio: 1/1;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 .pad-wrapper{
