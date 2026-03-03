@@ -1,39 +1,23 @@
 <script setup>
+import {usePadStore} from "../../stores/padStore.js";
+
 import Pad from "./Pad.vue";
 
-const props = defineProps({
-  pads: {
-    type: Array,
-    required: true,
-    default: () => []
-  }
-})
-console.log("Pad container pads:", props.pads)
-
-const totalPads = 9
-
-const getPadIndex = (i) => {
-  const row = Math.floor((i - 1) / 3)
-  const col = (i - 1) % 3
-
-  return (2 - row) * 3 + col
-}
-
-const getPadData = (index) => {
-  return props.pads.find(p => Number(p.index) === Number(index)) || null
-}
+const padStore = usePadStore();
+console.log("Pad container pads:", padStore.assignedPads)
 </script>
 
 <template>
   <div class="pad-grid">
     <div class="pad-wrapper"
-         v-for="i in totalPads"
-         :key="getPadIndex(i)"
+         v-for="i in padStore.totalPads"
+         :key="i"
     >
       <Pad
-          :sample="getPadData(getPadIndex(i))?.sample || null"
-          :index="getPadIndex(i)"
-          :alias="getPadData(getPadIndex(i))?.alias || getPadData(getPadIndex(i))?.sample?.name || ''"
+          :sample="padStore.getPadData(padStore.getPadIndex(i))?.sample || null"
+          :index="padStore.getPadIndex(i)"
+          :alias="padStore.getPadData(padStore.getPadIndex(i))?.alias
+          || padStore.getPadData(padStore.getPadIndex(i))?.sample?.name || ''"
       />
     </div>
   </div>
