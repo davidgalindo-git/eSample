@@ -25,5 +25,7 @@ const toggleDisplay = () => {
 </template>
 
 <style scoped>
-
+button {
+  margin-right: 10px;
+}
 </style>
