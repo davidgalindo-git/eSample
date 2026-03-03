@@ -37,7 +37,10 @@ const handlePadPopUp = () => {
             :sample="sample"
             @close-pop-up="handlePadPopUp"
         />
-        <BindPadButton @toggle-pad-pop-up="handlePadPopUp" :is-pad-pop-up="isPadPopUp" />
+        <BindPadButton
+            :is-pad-pop-up="isPadPopUp"
+            @toggle-pad-pop-up="handlePadPopUp"
+        />
         <LikeButton :sample-id="sample.id" />
         <DownloadButton :sample-id="sample.id" />
       </div>
