@@ -22,7 +22,17 @@ const handleAssign = (visualPos) => {
 
 <template>
   <div class="pad-pop-up">
-
+    <div class="mini-grid">
+      <button
+        v-for="i in padStore.totalPads"
+        :key="i"
+        class="mini-pad"
+        :class="{ 'is-occupied': padStore.getPadData(padStore.getPadIndex(i)) }"
+        @click="handleAssign(i)"
+      >
+       {{ padStore.getPadIndex(i) + 1}}
+      </button>
+    </div>
   </div>
 </template>
 
