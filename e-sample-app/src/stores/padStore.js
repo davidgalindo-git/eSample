@@ -14,9 +14,9 @@ export const usePadStore = defineStore('pads', () => {
 
     const loadDefaultKit = async () => {
         const defaultSamples = [
-            {index: 6, id: 704245, name: "Kick"},
-            {index: 7, id: 517297, name: "Snare"},
-            {index: 8, id: 363203, name: "Hi-Hat"}
+            {index: 6, id: 704245, alias: "Kick"},
+            {index: 7, id: 517297, alias: "Snare"},
+            {index: 8, id: 363203, alias: "Hi-Hat"}
         ];
 
         try {
@@ -31,6 +31,7 @@ export const usePadStore = defineStore('pads', () => {
 
                 return {
                     index: item.index,
+                    alias: item.alias,
                     sample: data
                 }
             })
