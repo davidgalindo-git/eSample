@@ -5,7 +5,7 @@ import LikeButton from "./like/LikeButton.vue";
 import DownloadButton from "./download/DownloadButton.vue";
 import BindPadButton from "./pad/BindPadButton.vue";
 import BindPadPopUp from "./pad/BindPadPopUp.vue";
-import {computed, ref} from "vue";
+import {ref} from "vue";
 
 const props = defineProps({
   sample:{
@@ -35,7 +35,7 @@ const handlePadPopUp = () => {
         <BindPadPopUp
             v-if="isPadPopUp"
             :sample="sample"
-            @close="handlePadPopUp"
+            @close-pop-up="handlePadPopUp"
         />
         <BindPadButton @toggle-pad-pop-up="handlePadPopUp" :is-pad-pop-up="isPadPopUp" />
         <LikeButton :sample-id="sample.id" />
