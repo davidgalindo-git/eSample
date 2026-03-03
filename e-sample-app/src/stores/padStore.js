@@ -38,6 +38,11 @@ export const usePadStore = defineStore('pads', () => {
         console.log(`Pad ${index} succesfully binded :`, alias || sample.name);    }
 
     const loadDefaultKit = async () => {
+        if (assignedPads.value.length > 0) {
+            console.log("LocalStorage contains assigned pads, default kit ignored")
+            return
+        }
+        
         const defaultSamples = [
             {index: 3, id: 833677, alias:"Vocal Chop"},
             {index: 4, id: 183107, alias:"Rim"},
