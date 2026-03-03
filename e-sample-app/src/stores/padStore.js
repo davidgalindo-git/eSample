@@ -20,7 +20,7 @@ export const usePadStore = defineStore('pads', () => {
         return assignedPads.value.find(p => Number(p.index) === Number(logicIndex)) || null
     }
 
-    const assignSampleToPad = (sample, index) => {
+    const assignSampleToPad = (sample, index, newAlias) => {
         assignedPads.value = assignedPads.value.filter(pad => pad.index !== index);
         assignedPads.value.push({
             index,
