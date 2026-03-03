@@ -1,21 +1,7 @@
 <script setup>
 import {ref} from "vue";
-import BindPadPopUp from "./BindPadPopUp.vue";
 
-const props = defineProps({
-  sample: {
-    type: Object,
-    default: null
-  },
-  index: {
-    type: Number,
-    required: true
-  },
-  alias : {
-    type: String,
-    required: false
-  }
-})
+const emit = defineEmits(['toggle-pad-pop-up'])
 
 const isPadPopUp = ref(false)
 
@@ -28,14 +14,12 @@ const togglePadPopUp = () => {
 </script>
 
 <template>
-  <BindPadPopUp
-      v-if="isPadPopUp"
-      class="pad-pop-up"
-  />
   <button
       class="bind-pad-button"
       @click.stop="togglePadPopUp"
+      :class="{ 'is-active': isPadPopUp }"
   >
+    {{ isPadPopUp ? 'x' : '+'}}
   </button>
 </template>
 
