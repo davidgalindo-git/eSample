@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, watch} from "vue";
+import {computed, watch} from "vue";
 
 const props = defineProps({
   sample: {
@@ -9,6 +9,10 @@ const props = defineProps({
   index: {
     type: Number,
     required: true
+  },
+  alias : {
+    type: String,
+    required: false
   }
 })
 
@@ -40,7 +44,7 @@ watch(() => props.sample, (newSample) => {
   >
     <span class="pad-label">{{ index + 1 }}</span>
     <div v-if="hasSample" class="sample-info">
-      <p class="sample-name">{{ sample.name }}</p>
+      <p class="sample-alias">{{ props.alias }}</p>
     </div>
     <div v-else class="empty-slot">+</div>
   </div>
@@ -82,7 +86,7 @@ watch(() => props.sample, (newSample) => {
   font-weight: bold;
 }
 
-.sample-name {
+.sample-alias {
   font-size: 0.6rem;
   text-align: center;
   padding: 5px;

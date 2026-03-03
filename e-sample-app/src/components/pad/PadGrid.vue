@@ -19,9 +19,8 @@ const getPadIndex = (i) => {
   return (2 - row) * 3 + col
 }
 
-const getPadSample = (index) => {
-  const foundSample = props.pads.find(p => Number(p.index) === Number(index)) || null
-  return foundSample ? foundSample.sample : null
+const getPadData = (index) => {
+  return props.pads.find(p => Number(p.index) === Number(index)) || null
 }
 </script>
 
@@ -32,8 +31,9 @@ const getPadSample = (index) => {
          :key="getPadIndex(i)"
     >
       <Pad
-          :sample="getPadSample(getPadIndex(i))"
+          :sample="getPadData(getPadIndex(i))?.sample || null"
           :index="getPadIndex(i)"
+          :alias="getPadData(getPadIndex(i))?.alias || getPadData(getPadIndex(i))?.sample?.name || ''"
       />
     </div>
   </div>
