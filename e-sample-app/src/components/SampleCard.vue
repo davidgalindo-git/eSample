@@ -3,6 +3,7 @@ import { usePlayer } from "../stores/player.js";
 import PlayButton from "./PlayButton.vue";
 import LikeButton from "./like/LikeButton.vue";
 import DownloadButton from "./download/DownloadButton.vue";
+import BindPadButton from "./pad/BindPadButton.vue";
 
 const props = defineProps({
   sample:{
@@ -23,6 +24,7 @@ const player = usePlayer()
       />
       <p class="sample-name">{{ sample.name }}</p>
       <div>
+        <BindPadButton index="" />
         <LikeButton :sample-id="sample.id" />
         <DownloadButton :sample-id="sample.id" />
       </div>
