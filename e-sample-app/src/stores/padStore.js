@@ -14,6 +14,9 @@ export const usePadStore = defineStore('pads', () => {
 
     const loadDefaultKit = async () => {
         const defaultSamples = [
+            {index: 3, id: 833677, alias:"Vocal Chop"},
+            {index: 4, id: 183107, alias:"Rim"},
+            {index: 5, id: 509984, alias:"Open Hat"},
             {index: 6, id: 704245, alias: "Kick"},
             {index: 7, id: 517297, alias: "Snare"},
             {index: 8, id: 363203, alias: "Hi-Hat"}
