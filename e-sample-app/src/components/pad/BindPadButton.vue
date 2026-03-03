@@ -35,8 +35,8 @@ const emit = defineEmits(['toggle-pad-pop-up'])
 }
 
 .bind-pad-button.is-active {
-  background: #ff4444; /* Rouge pour fermer */
-  border-color: #ff8888;
+  color: #da4848;
+  border-color: #da4848;
 }
 
 .bind-pad-button:hover {
