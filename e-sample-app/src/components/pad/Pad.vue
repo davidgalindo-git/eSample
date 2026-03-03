@@ -44,7 +44,7 @@ watch(() => props.sample, (newSample) => {
   >
     <span class="pad-label">{{ index + 1 }}</span>
     <div v-if="hasSample" class="sample-info">
-      <p class="sample-alias">{{ props.alias }}</p>
+      <p class="sample-alias">{{ alias }}</p>
     </div>
     <div v-else class="empty-slot">+</div>
   </div>
