@@ -7,9 +7,26 @@ export const usePadStore = defineStore('pads', () => {
 
     const assignedPads = ref([])
 
+    const totalPads = 9
+
+    const getPadIndex = (visualPos) => {
+        const row = Math.floor((visualPos - 1) / 3)
+        const col = (visualPos - 1) % 3
+
+        return (2 - row) * 3 + col
+    }
+
+    const getPadData = (logicIndex) => {
+        return assignedPads.value.find(p => Number(p.index) === Number(logicIndex)) || null
+    }
+
     const assignSampleToPad = (sample, index) => {
         assignedPads.value = assignedPads.value.filter(pad => pad.index !== index);
-        assignedPads.value.push({index,sample});
+        assignedPads.value.push({
+            index,
+            sample,
+            alias: alias || sample.name
+        });
     }
 
     const loadDefaultKit = async () => {
@@ -42,11 +59,10 @@ export const usePadStore = defineStore('pads', () => {
             const results = await Promise.all(promises);
             assignedPads.value = results.filter(r => r !== null);
             console.log("Default kit loaded with previews", assignedPads.value);
-
         } catch (error) {
             console.log("Failed to load default kit", error);
         }
     };
 
-    return { assignedPads, assignSampleToPad, loadDefaultKit };
+    return { assignedPads, totalPads, getPadIndex, getPadData, assignSampleToPad, loadDefaultKit };
 })
