@@ -10,14 +10,19 @@ import LikedSamplesList from "./components/like/LikedSamplesList.vue";
 import ShowLikesButton from "./components/like/ShowLikesButton.vue";
 import FreesoundLoginButton from "./components/download/FreesoundLoginButton.vue";
 import PadGrid from "./components/pad/PadGrid.vue";
+import ShowPadButton from "./components/pad/ShowPadButton.vue";
 
 const sampleStore =useSampleAPI()
 const padStore = usePadStore()
 
-const isVisible = ref(false)
+const isPadVisible = ref(false)
+const isLikesVisible = ref(false)
 
 const toggleLikes = (value) => {
-  isVisible.value = value
+  isLikesVisible.value = value
+}
+const togglePad = (value) => {
+  isPadVisible.value = value
 }
 
 onMounted(() => {
@@ -32,9 +37,10 @@ onMounted(() => {
     <FreesoundLoginButton />
     <h1>eSample</h1>
     <SearchBar />
-    <PadGrid :pads="padStore.assignedPads" />
-    <ShowLikesButton :is-visible="isVisible" @toggle-display="toggleLikes"/>
-    <LikedSamplesList v-show="isVisible"/>
+    <ShowPadButton :is-visible="isPadVisible" @toggle-display="togglePad" />
+    <PadGrid :pads="padStore.assignedPads" v-show="isPadVisible" />
+    <ShowLikesButton :is-visible="isLikesVisible" @toggle-display="toggleLikes"/>
+    <LikedSamplesList v-show="isLikesVisible"/>
     <p>Nb of samples: {{ sampleStore.samples.value.length }}</p>
     <SampleContainer :samples="sampleStore.samples.value"/>
   </div>
