@@ -21,6 +21,8 @@ const isPadPopUp = ref(false)
 
 const togglePadPopUp = () => {
   isPadPopUp.value = !isPadPopUp.value
+
+  emit("toggle-pad-pop-up", isPadPopUp.value)
 }
 
 </script>
