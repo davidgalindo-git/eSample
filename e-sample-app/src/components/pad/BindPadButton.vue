@@ -23,9 +23,6 @@ const togglePadPopUp = () => {
   isPadPopUp.value = !isPadPopUp.value
 }
 
-const bindSample = () => {
-
-}
 </script>
 
 <template>
