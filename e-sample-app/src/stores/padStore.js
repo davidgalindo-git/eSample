@@ -5,7 +5,8 @@ import {useFreesoundAuth} from "./api.js";
 export const usePadStore = defineStore('pads', () => {
     const auth = useFreesoundAuth();
 
-    const assignedPads = ref([])
+    const savedPads = localStorage.getItem("assignedPads")
+    const assignedPads = ref(savedPads ? JSON.parse(savedPads) : [])
 
     const totalPads = 9
 
