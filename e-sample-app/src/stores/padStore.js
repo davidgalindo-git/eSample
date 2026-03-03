@@ -6,6 +6,8 @@ export const usePadStore = defineStore('pads', () => {
     const auth = useFreesoundAuth();
 
     const savedPads = localStorage.getItem("assignedPads")
+    console.log('Saved pads: ', savedPads)
+
     const assignedPads = ref(savedPads ? JSON.parse(savedPads) : [])
 
     const totalPads = 9
