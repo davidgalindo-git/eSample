@@ -22,6 +22,7 @@ export const usePadStore = defineStore('pads', () => {
 
     const assignSampleToPad = (sample, index, newAlias) => {
         assignedPads.value = assignedPads.value.filter(pad => pad.index !== index);
+        const alias = newAlias || sample.name
         assignedPads.value.push({
             index,
             sample,
