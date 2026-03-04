@@ -22,7 +22,7 @@ export const useSampleAPI = () => {
         currentPage.value = page
 
         // build URL : freesound URL + search + query + token + return fields
-        const url = `${freesoundURL}search/?query=${query}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
+        const url = `${freesoundURL}search/?query=${query}&page=${page}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
 
         loading.value = true         // update loading state
         try{
