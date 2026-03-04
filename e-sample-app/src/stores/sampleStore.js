@@ -110,7 +110,7 @@ export const useSampleAPI = () => {
         } finally {
             loading.value = false        // update loading state
         }
-    },
+    }
 
     const getPreviewUrl = async (sampleId) => {
         const url = `${freesoundURL}sounds/${sampleId}/?token=${FREESOUND_API_KEY}&fields=previews`
