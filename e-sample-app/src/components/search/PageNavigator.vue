@@ -1,6 +1,14 @@
 <script setup>
 import { useSampleAPI } from '../../stores/sampleStore.js';
 const sampleStore = useSampleAPI();
+
+const changePage = (newPage) => {
+  const targetPage = Number(newPage);
+
+  if (targetPage >= 1 && targetPage <= sampleStore.totalPages.value) {
+    sampleStore.searchSamples(sampleStore.currentQuery.value, targetPage);
+  }
+};
 </script>
 
 <template>
