@@ -1,6 +1,7 @@
 <script setup>
 import {ref} from 'vue'
 import { useSampleAPI } from '../../stores/sampleStore.js'
+import PageNavigator from "./PageNavigator.vue";
 
 const sampleStore = useSampleAPI()
 const keyword = ref('')
@@ -18,6 +19,7 @@ const submitKeyword = async () => {
         @keyup.enter="submitKeyword"
     />
     <button @click="submitKeyword">Search</button>
+    <PageNavigator />
     <p v-if="keyword !== ''">keyword: {{ keyword }}</p>
   </div>
 </template>
