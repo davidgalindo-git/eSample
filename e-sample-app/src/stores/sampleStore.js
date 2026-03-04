@@ -7,6 +7,10 @@ const freesoundURL = freesoundAuth.freesoundURL;
 const FREESOUND_API_KEY = freesoundAuth.client_secret;
 
 const samples = ref([])
+const totalCount = ref(0)
+const currentPage = ref(1)
+const samplesPerPage = 15
+const currentQuery = ref("")
 const likedSamples = ref([])
 const loading = ref(false)
 
