@@ -22,5 +22,11 @@ const submitKeyword = async () => {
 </template>
 
 <style scoped>
-
+button {
+  margin-left: 10px;
+}
+.search-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 </style>
