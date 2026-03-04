@@ -17,7 +17,10 @@ const loading = ref(false)
 // API request function management
 export const useSampleAPI = () => {
     // sample research with input
-    const searchSamples = async (query) => {
+    const searchSamples = async (query, page = 1) => {
+        currentQuery.value = query
+        currentPage.value = page
+
         // build URL : freesound URL + search + query + token + return fields
         const url = `${freesoundURL}search/?query=${query}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
 
