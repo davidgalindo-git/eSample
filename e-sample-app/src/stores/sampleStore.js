@@ -38,7 +38,11 @@ export const useSampleAPI = () => {
         }
     }
 
-    const totalPages = computed(() => Math.ceil(totalCount.value / samplesPerPage))
+    const totalPages = computed(() => {
+        const count = totalCount.value || 0
+        const pages = Math.ceil(count / samplesPerPage)
+        return isNaN(pages) || pages < 1 ? 1 : pages
+    })
 
     const searchLikedSamples = async (likedList) => {
         loading.value = true
