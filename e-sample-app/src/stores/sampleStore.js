@@ -133,6 +133,18 @@ export const useSampleAPI = () => {
             console.error("Sample fetch preview error: ", error)
         }
     }
-    return { samples, likedSamples, loading, searchSamples, searchLikedSamples, downloadSample, getPreviewUrl }
+    return {
+        samples,
+        currentPage,
+        totalPages,
+        totalCount,
+        currentQuery,
+        likedSamples,
+        loading,
+        searchSamples,
+        searchLikedSamples,
+        downloadSample,
+        getPreviewUrl
+    }
 }
 
