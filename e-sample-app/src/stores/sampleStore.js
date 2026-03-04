@@ -38,6 +38,8 @@ export const useSampleAPI = () => {
         }
     }
 
+    const totalPages = computed(() => Math.ceil(totalCount.value / samplesPerPage))
+
     const searchLikedSamples = async (likedList) => {
         loading.value = true
         try{
