@@ -27,6 +27,7 @@ const submitKeyword = async () => {
 <style scoped>
 button {
   margin-left: 10px;
+  margin-bottom: 10px;
 }
 .search-container {
   margin-top: 20px;
