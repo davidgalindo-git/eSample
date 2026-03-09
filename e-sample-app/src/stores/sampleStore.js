@@ -18,8 +18,10 @@ const loading = ref(false)
 export const useSampleAPI = () => {
     // sample research with input
     const searchSamples = async (query, page = 1) => {
+        const pageNumber = Number(page)
+
         currentQuery.value = query
-        currentPage.value = page
+        currentPage.value = pageNumber
 
         // build URL : freesound URL + search + query + token + return fields
         const url = `${freesoundURL}search/?query=${query}&page=${page}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
