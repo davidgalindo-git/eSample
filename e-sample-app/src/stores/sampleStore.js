@@ -13,6 +13,13 @@ const samplesPerPage = 15
 const currentQuery = ref("")
 const likedSamples = ref([])
 const loading = ref(false)
+const totalPages = computed(() => {
+    const count = totalCount.value || 0
+    const pages = Math.ceil(count / samplesPerPage)
+    return isNaN(pages) || pages < 1 ? 1 : pages
+})
+const isFirstPage = computed(() => currentPage.value <= 1)
+const isLastPage = computed(() => currentPage.value === totalPages.value)
 
 // API request function management
 export const useSampleAPI = () => {
@@ -24,7 +31,7 @@ export const useSampleAPI = () => {
         currentPage.value = pageNumber
 
         // build URL : freesound URL + search + query + token + return fields
-        const url = `${freesoundURL}search/?query=${query}&page=${page}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
+        const url = `${freesoundURL}search/?query=${query}&page=${pageNumber}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
 
         loading.value = true         // update loading state
         try{
@@ -39,12 +46,6 @@ export const useSampleAPI = () => {
             loading.value = false        // update loading state
         }
     }
-
-    const totalPages = computed(() => {
-        const count = totalCount.value || 0
-        const pages = Math.ceil(count / samplesPerPage)
-        return isNaN(pages) || pages < 1 ? 1 : pages
-    })
 
     const searchLikedSamples = async (likedList) => {
         loading.value = true
@@ -150,7 +151,9 @@ export const useSampleAPI = () => {
         searchSamples,
         searchLikedSamples,
         downloadSample,
-        getPreviewUrl
+        getPreviewUrl,
+        isFirstPage,
+        isLastPage
     }
 }
 
