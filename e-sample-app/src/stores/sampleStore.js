@@ -1,4 +1,4 @@
-import {ref} from "vue";
+import {ref, computed} from "vue";
 import {useFreesoundAuth} from "./api.js";
 
 // local flags and containers init
@@ -7,21 +7,38 @@ const freesoundURL = freesoundAuth.freesoundURL;
 const FREESOUND_API_KEY = freesoundAuth.client_secret;
 
 const samples = ref([])
+const totalCount = ref(0)
+const currentPage = ref(1)
+const samplesPerPage = 15
+const currentQuery = ref("")
 const likedSamples = ref([])
 const loading = ref(false)
+const totalPages = computed(() => {
+    const count = totalCount.value || 0
+    const pages = Math.ceil(count / samplesPerPage)
+    return isNaN(pages) || pages < 1 ? 1 : pages
+})
+const isFirstPage = computed(() => currentPage.value <= 1)
+const isLastPage = computed(() => currentPage.value === totalPages.value)
 
 // API request function management
 export const useSampleAPI = () => {
     // sample research with input
-    const searchSamples = async (query) => {
+    const searchSamples = async (query, page = 1) => {
+        const pageNumber = Number(page)
+
+        currentQuery.value = query
+        currentPage.value = pageNumber
+
         // build URL : freesound URL + search + query + token + return fields
-        const url = `${freesoundURL}search/?query=${query}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
+        const url = `${freesoundURL}search/?query=${query}&page=${pageNumber}&token=${FREESOUND_API_KEY}&fields=id,name,tags,previews,username,license`
 
         loading.value = true         // update loading state
         try{
             const res = await fetch(url)    // asynchronous fetch to API
             const data = await res.json()   // store result
             samples.value = data.results         // update samples data
+            totalCount.value = data.count   // update sample count
             console.log("Samples loaded:", samples.value); // DEBUG
         } catch(error) {
             console.error("Search failed: ", error)
@@ -110,9 +127,9 @@ export const useSampleAPI = () => {
         } finally {
             loading.value = false        // update loading state
         }
-    },
+    }
 
-    getPreviewUrl = async (sampleId) => {
+    const getPreviewUrl = async (sampleId) => {
         const url = `${freesoundURL}sounds/${sampleId}/?token=${FREESOUND_API_KEY}&fields=previews`
 
         try {
@@ -123,6 +140,20 @@ export const useSampleAPI = () => {
             console.error("Sample fetch preview error: ", error)
         }
     }
-    return { samples, likedSamples, loading, searchSamples, searchLikedSamples, downloadSample, getPreviewUrl }
+    return {
+        samples,
+        currentPage,
+        totalPages,
+        totalCount,
+        currentQuery,
+        likedSamples,
+        loading,
+        searchSamples,
+        searchLikedSamples,
+        downloadSample,
+        getPreviewUrl,
+        isFirstPage,
+        isLastPage
+    }
 }
 
