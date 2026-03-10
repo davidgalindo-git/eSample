@@ -13,7 +13,17 @@ const padStore = usePadStore()
 
 const handleAssign = (visualPos) => {
   const logicIndex = padStore.getPadIndex(visualPos)
-  padStore.assignSampleToPad(props.sample, logicIndex, props.sample.name)
+  const existingData = padStore.getPadData(logicIndex)
+
+  // Error Guard: Confirmation if pad is already used
+  if (existingData && !confirm(`Overwrite ${existingData.alias}: ${existingData.sample.name}?`)) {
+    return;
+  }
+
+  // Safety: Ensure pad has a fallback name
+  const sampleName = props.sample.name || `Sample #${props.sample.id}`;
+
+  padStore.assignSampleToPad(props.sample, logicIndex, sampleName)
 
   emit('close-pop-up')
 }
