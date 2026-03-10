@@ -35,6 +35,12 @@ watch(() => props.sample, (newSample) => {
     console.log(`Pad #${props.index} got sample :`, newSample.name);
   }
 });
+
+onMounted(() => {
+  window.addEventListener("keydown", (e) => {
+    if (e.key === String(props.index + 1)) playPreview();
+  });
+})
 </script>
 
 <template>
