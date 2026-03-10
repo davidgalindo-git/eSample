@@ -1,20 +1,30 @@
 <script setup>
-import { useSampleAPI } from '../../stores/sampleStore.js';
-const sampleStore = useSampleAPI();
+const props = defineProps({
+  currentPage: Number,
+  totalPages: Number
+})
+
+const emit = defineEmits(['changePage'])
 
 const previousPage = () => {
-  sampleStore.searchSamples(sampleStore.currentQuery.value, sampleStore.currentPage.value - 1);
+  if (props.currentPage > 1) {
+    emit('changePage', props.currentPage - 1)
+  }
 }
 
 const nextPage = () => {
-  sampleStore.searchSamples(sampleStore.currentQuery.value, sampleStore.currentPage.value + 1);
+  if (props.currentPage < props.totalPages) {
+    emit('changePage', props.currentPage + 1)
+  }
 };
 
 const handleInputPage = (event) => {
   const targetPage = Number(event.target.value);
 
-  if (targetPage >= 1 && targetPage <= sampleStore.totalPages.value) {
-    sampleStore.searchSamples(sampleStore.currentQuery.value, targetPage);
+  if (targetPage >= 1 && targetPage <= props.totalPages) {
+    emit('changePage', targetPage)
+  } else {
+    event.target.value = props.currentPage
   }
 }
 </script>
@@ -23,7 +33,7 @@ const handleInputPage = (event) => {
   <div class="pagination-controls"
   >
     <button
-        :disabled="sampleStore.currentPage.value <= 1"
+        :disabled="currentPage <= 1"
         @click="previousPage"
     >
       Previous
@@ -32,21 +42,21 @@ const handleInputPage = (event) => {
     <span>
       Page
       <input
-          :key="sampleStore.currentPage"
+          :key="currentPage"
           type="number"
-          :value="sampleStore.currentPage.value"
+          :value="currentPage"
           @change="handleInputPage"
           @keyup.enter="handleInputPage"
           @focus="$event.target.select()"
           style="width: 7ch; text-align: center"
           min="1"
-          :max="sampleStore.totalPages.value"
+          :max="totalPages"
       >
-      / {{ sampleStore.totalPages }}
+      / {{ totalPages }}
     </span>
 
     <button
-        :disabled="sampleStore.currentPage.value >= sampleStore.totalPages.value"
+        :disabled="currentPage >= totalPages"
         @click="nextPage"
     >
       Next
