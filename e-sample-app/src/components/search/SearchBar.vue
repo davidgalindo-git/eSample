@@ -9,6 +9,10 @@ const keyword = ref('')
 const submitKeyword = async () => {
   await sampleStore.searchSamples(keyword.value)
 }
+
+const handleChangePage = (newPage) => {
+  sampleStore.searchSamples(sampleStore.currentQuery.value, newPage)
+}
 </script>
 
 <template>
@@ -19,7 +23,11 @@ const submitKeyword = async () => {
         @keyup.enter="submitKeyword"
     />
     <button @click="submitKeyword">Search</button>
-    <PageNavigator />
+    <PageNavigator
+      :current-page="sampleStore.currentPage.value"
+      :totalPages="sampleStore.totalPages.value"
+      @change-page="handleChangePage"
+    />
     <p v-if="keyword !== ''">keyword: {{ keyword }}</p>
   </div>
 </template>
