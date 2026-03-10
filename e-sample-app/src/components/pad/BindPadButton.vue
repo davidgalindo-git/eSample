@@ -19,6 +19,7 @@ const handleToggle = () => {
       type="button"
       @click.stop="handleToggle"
       :class="{ 'is-active': isPadPopUp }"
+      :title="isPadPopUp ? 'Close assignment' : 'Assign to Pad'"
   >
     {{ isPadPopUp ? 'x' : '+'}}
   </button>
