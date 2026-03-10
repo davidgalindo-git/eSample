@@ -4,6 +4,18 @@ import {usePadStore} from "../../stores/padStore.js";
 import Pad from "./Pad.vue";
 
 const padStore = usePadStore();
+
+const getPadProps = (visualIndex) => {
+  // Return props for "Pad" component
+  const dataIndex = padStore.getPadIndex(visualIndex);
+  const padData = padStore.getPadData(visualIndex);
+
+  return {
+    sample: padData?.sample || null,
+    index: dataIndex,
+    alias: padData?.alias || padData?.sample?.name || ""
+  }
+}
 console.log("Pad container pads:", padStore.assignedPads)
 </script>
 
