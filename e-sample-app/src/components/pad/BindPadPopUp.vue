@@ -33,7 +33,7 @@ const handleAssign = (visualPos) => {
 </script>
 
 <template>
-  <div class="pad-pop-up">
+  <div class="pad-pop-up" v-if="padStore.totalPads > 0">
     <div class="mini-grid">
       <button
         v-for="i in padStore.totalPads"
