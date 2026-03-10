@@ -7,6 +7,10 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['toggle-pad-pop-up'])
+
+const handleToggle = () => {
+  emit('toggle-pad-pop-up')
+}
 </script>
 
 <template>
