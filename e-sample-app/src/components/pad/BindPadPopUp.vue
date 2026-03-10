@@ -14,6 +14,7 @@ const emit = defineEmits(['close-pop-up'])
 const padStore = usePadStore()
 
 const handleAssign = (visualPos) => {
+  // Function: Assigns sample to pad
   const logicIndex = padStore.getPadIndex(visualPos)
   const existingData = padStore.getPadData(logicIndex)
 
@@ -30,6 +31,17 @@ const handleAssign = (visualPos) => {
   emit('close-pop-up')
 }
 
+const getTitle = (visualPos) => {
+  const logicIndex = padStore.getPadIndex(visualPos)
+  const data = padStore.getPadData(logicIndex)
+
+  if (!data) return "Empty Pad"
+
+  const alias = data.alias
+  const name = data.sample.name
+
+  return alias && alias !== name ? `${alias} (${name})` : name
+}
 </script>
 
 <template>
@@ -40,6 +52,7 @@ const handleAssign = (visualPos) => {
         :key="i"
         class="mini-pad"
         :class="{ 'is-occupied': padStore.getPadData(padStore.getPadIndex(i)) }"
+        :title="getTitle(i)"
         @click="handleAssign(i)"
       >
        {{ padStore.getPadIndex(i) + 1}}
