@@ -4,7 +4,9 @@ import {usePadStore} from "../../stores/padStore.js";
 const props = defineProps({
   sample: {
     type: Object,
-    required: true
+    required: true,
+    // Error Guard: ensure the sample actually has data
+    validator: (s) => s.id && (s.name || s.username)
   }
 })
 
