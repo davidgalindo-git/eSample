@@ -10,7 +10,7 @@ const props = defineProps({
 const emit = defineEmits(['toggle-display']);
 
 const toggleDisplay = () => {
-  // Error Management: prevent props type error
+  // Error Guard: prevent props type error
   if (typeof props.isVisible !== 'boolean') {
     console.error("TypeError : isVisible must be a boolean.");
     return
