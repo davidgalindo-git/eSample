@@ -16,7 +16,8 @@ const handleToggle = () => {
 <template>
   <button
       class="bind-pad-button"
-      @click.stop="emit('toggle-pad-pop-up')"
+      type="button"
+      @click.stop="handleToggle"
       :class="{ 'is-active': isPadPopUp }"
   >
     {{ isPadPopUp ? 'x' : '+'}}
