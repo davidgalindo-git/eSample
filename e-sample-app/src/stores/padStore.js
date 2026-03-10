@@ -37,7 +37,7 @@ export const usePadStore = defineStore('pads', () => {
         });
 
         saveToLocalStorage()
-        console.log(`Pad ${index} succesfully binded :`, alias || sample.name);    }
+        console.log(`Pad ${index + 1} succesfully binded :`, alias || sample.name);    }
 
     const loadDefaultKit = async () => {
         if (assignedPads.value.length > 0) {
@@ -46,9 +46,11 @@ export const usePadStore = defineStore('pads', () => {
         }
         
         const defaultSamples = [
-            {index: 3, id: 833677, alias:"Vocal Chop"},
-            {index: 4, id: 183107, alias:"Rim"},
-            {index: 5, id: 509984, alias:"Open Hat"},
+            {index: 1, id: 568316, alias: "Guitar Loop"},
+            {index: 2, id: 96883, alias: "Drum Loop"},
+            {index: 3, id: 833677, alias: "Vocal Chop"},
+            {index: 4, id: 183107, alias: "Rim"},
+            {index: 5, id: 509984, alias: "Open Hat"},
             {index: 6, id: 704245, alias: "Kick"},
             {index: 7, id: 517297, alias: "Snare"},
             {index: 8, id: 363203, alias: "Hi-Hat"}

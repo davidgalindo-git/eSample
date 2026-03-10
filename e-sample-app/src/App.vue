@@ -26,7 +26,7 @@ const togglePad = (value) => {
 }
 
 onMounted(() => {
-  if (padStore.assignedPads.length === 0) {
+  if (!padStore.assignedPads || !padStore.assignedPads.length === 0) {
     padStore.loadDefaultKit();
   }
 });
