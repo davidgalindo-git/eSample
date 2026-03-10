@@ -2,7 +2,7 @@
 const props = defineProps({
   isVisible: {
     type: Boolean,
-    required: true
+    default: false
   }
 })
 
