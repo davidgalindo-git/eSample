@@ -6,9 +6,9 @@ import Pad from "./Pad.vue";
 const padStore = usePadStore();
 
 const getPadProps = (visualIndex) => {
-  // Return props for "Pad" component
+  // Function: Returns props for "Pad" component
   const dataIndex = padStore.getPadIndex(visualIndex);
-  const padData = padStore.getPadData(visualIndex);
+  const padData = padStore.getPadData(dataIndex);
 
   return {
     sample: padData?.sample || null,
