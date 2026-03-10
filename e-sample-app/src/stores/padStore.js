@@ -37,7 +37,7 @@ export const usePadStore = defineStore('pads', () => {
         });
 
         saveToLocalStorage()
-        console.log(`Pad ${index} succesfully binded :`, alias || sample.name);    }
+        console.log(`Pad ${index + 1} succesfully binded :`, alias || sample.name);    }
 
     const loadDefaultKit = async () => {
         if (assignedPads.value.length > 0) {
