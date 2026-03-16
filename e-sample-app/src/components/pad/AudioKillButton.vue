@@ -43,7 +43,9 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.stop-btn {
+.btn-container {
+  position: relative;
+
   background-color: rgba(255, 68, 68, 0.69);
   color: white;
   padding: 10px 20px;
