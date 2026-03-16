@@ -60,6 +60,8 @@ onUnmounted(() => {
   cursor: pointer;
   font-weight: bold;
   margin: 5px;
+  transition: all 0.1s ease;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 .stop-btn:hover {
   background-color: #cc0000;
