@@ -16,6 +16,8 @@ const props = defineProps({
   }
 })
 
+const playerStore = usePlayer()
+
 const hasSample = computed(() => props.sample !== null)
 
 const playPreview = () => {
