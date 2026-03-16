@@ -49,9 +49,7 @@ watch(() => props.sample, (newSample) => {
 });
 
 onMounted(() => {
-  window.addEventListener("keydown", (e) => {
-    if (e.key === String(props.index + 1)) playPreview();
-  });
+  window.addEventListener("keydown", handleKeyDown);
 })
 
 onUnmounted(() => {
