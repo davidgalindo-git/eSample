@@ -13,6 +13,10 @@ const handleKeyDown = (e) => {
   }
 }
 
+const handleClick = () => {
+  stopAll()
+}
+
 const stopAll = () => {
   console.log("Stopped player (all)")
   emit("stopAll")
@@ -29,7 +33,7 @@ onUnmounted(() => {
 
 <template>
 <button
-    @click.stop="handleKeyDown"
+    @click.stop="handleClick"
     type="button"
     class="stop-btn"
 >
