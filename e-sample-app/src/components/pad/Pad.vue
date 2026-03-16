@@ -35,6 +35,8 @@ const playPreview = () => {
 }
 
 const handleKeyDown = (e) => {
+  if (e.repeat) return
+
   if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
 
   if (e.key === String(props.index + 1)) {
