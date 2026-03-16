@@ -47,6 +47,17 @@ console.log("Pad container pads:", padStore.assignedPads)
 </template>
 
 <style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.grid-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
 .pad-grid{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
