@@ -5,6 +5,7 @@ import Pad from "./Pad.vue";
 import AudioKillButton from "./AudioKillButton.vue";
 import {usePlayer} from "../../stores/player.js";
 
+const playerStore = usePlayer();
 const padStore = usePadStore();
 
 const getPadProps = (visualIndex) => {
