@@ -32,13 +32,14 @@ onUnmounted(() => {
 </script>
 
 <template>
-<button
-    @click.stop="handleClick"
-    type="button"
-    class="stop-btn"
->
-  STOP ALL (0)
-</button>
+<div class="btn-container">
+  <span class="label">0</span>
+  <div
+      @mousedown="handleClick"
+  >
+    STOP ALL
+  </div>
+</div>
 </template>
 
 <style scoped>
