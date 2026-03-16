@@ -21,7 +21,7 @@ const getPadProps = (visualIndex) => {
 }
 
 const stopAudio = () => {
-  playerStore.stop()
+  playerStore.stopAll()
 }
 
 console.log("Pad container pads:", padStore.assignedPads)
