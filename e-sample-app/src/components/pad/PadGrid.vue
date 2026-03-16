@@ -28,12 +28,14 @@ console.log("Pad container pads:", padStore.assignedPads)
 </script>
 
 <template>
-  <div class="pad-grid" v-if="padStore.totalPads > 0">
-    <div class="pad-wrapper"
-         v-for="i in padStore.totalPads"
-         :key="i"
-    >
-      <Pad v-bind="getPadProps(i)"/>
+  <div class="container"  v-if="padStore.totalPads > 0">
+    <div class="pad-grid">
+      <div class="pad-wrapper"
+           v-for="i in padStore.totalPads"
+           :key="i"
+      >
+        <Pad v-bind="getPadProps(i)"/>
+      </div>
     </div>
   </div>
   <div v-else class="error-msg">
