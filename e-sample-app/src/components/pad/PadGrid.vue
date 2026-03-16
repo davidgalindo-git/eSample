@@ -20,7 +20,7 @@ const getPadProps = (visualIndex) => {
   }
 }
 
-const stopPads = () => {
+const stopAudio = () => {
   playerStore.stop()
 }
 
@@ -38,7 +38,7 @@ console.log("Pad container pads:", padStore.assignedPads)
       </div>
     </div>
     <AudioKillButton
-        @stop="stopPads"
+        @stop="stopAudio"
     />
   </div>
   <div v-else class="error-msg">
