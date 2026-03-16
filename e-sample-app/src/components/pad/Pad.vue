@@ -53,6 +53,10 @@ onMounted(() => {
     if (e.key === String(props.index + 1)) playPreview();
   });
 })
+
+onUnmounted(() => {
+  window.removeEventListener("keydown", handleKeyDown);
+});
 </script>
 
 <template>
