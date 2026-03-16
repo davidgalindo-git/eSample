@@ -2,7 +2,10 @@
 import {usePadStore} from "../../stores/padStore.js";
 
 import Pad from "./Pad.vue";
+import AudioKillButton from "./AudioKillButton.vue";
+import {usePlayer} from "../../stores/player.js";
 
+const playerStore = usePlayer();
 const padStore = usePadStore();
 
 const getPadProps = (visualIndex) => {
@@ -16,17 +19,27 @@ const getPadProps = (visualIndex) => {
     alias: padData?.alias || padData?.sample?.name || ""
   }
 }
+
+const stopPads = () => {
+  playerStore.stop()
+}
+
 console.log("Pad container pads:", padStore.assignedPads)
 </script>
 
 <template>
-  <div class="pad-grid" v-if="padStore.totalPads > 0">
-    <div class="pad-wrapper"
-         v-for="i in padStore.totalPads"
-         :key="i"
-    >
-      <Pad v-bind="getPadProps(i)"/>
+  <div class="container"  v-if="padStore.totalPads > 0">
+    <div class="pad-grid">
+      <div class="pad-wrapper"
+           v-for="i in padStore.totalPads"
+           :key="i"
+      >
+        <Pad v-bind="getPadProps(i)"/>
+      </div>
     </div>
+    <AudioKillButton
+        @stop="stopPads"
+    />
   </div>
   <div v-else class="error-msg">
     No pads available. Please load kit or bind samples to pads.
