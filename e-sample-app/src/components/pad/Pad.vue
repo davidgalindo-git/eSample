@@ -1,5 +1,6 @@
 <script setup>
 import {computed, onMounted, onUnmounted, watch} from "vue";
+import {usePlayer} from "../../stores/player.js";
 
 const props = defineProps({
   sample: {
