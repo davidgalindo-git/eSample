@@ -16,6 +16,11 @@ const getPadProps = (visualIndex) => {
     alias: padData?.alias || padData?.sample?.name || ""
   }
 }
+
+const stopPads = () => {
+  playerStore.stop()
+}
+
 console.log("Pad container pads:", padStore.assignedPads)
 </script>
 
