@@ -9,6 +9,7 @@ export const usePlayer = defineStore("player", {
         currentTime: 0,
         duration: 0,
         currentSample: null,
+        activeAudios: []
     }),
 
     getters: {
