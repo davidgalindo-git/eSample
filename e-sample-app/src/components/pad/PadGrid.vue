@@ -37,6 +37,9 @@ console.log("Pad container pads:", padStore.assignedPads)
         <Pad v-bind="getPadProps(i)"/>
       </div>
     </div>
+    <AudioKillButton
+        @stop="stopPads"
+    />
   </div>
   <div v-else class="error-msg">
     No pads available. Please load kit or bind samples to pads.
