@@ -23,9 +23,7 @@ const playPreview = () => {
     const audioUrl = props.sample.previews['preview-lq-mp3']
     const audio = new Audio(audioUrl)
 
-    audio.onended = () => {
-      audio.remove()
-    };
+    playerStore.addAudio(audio)
 
     audio.play().catch(err => console.error("Play preview error", err))
     console.log("Playing: ", audioUrl)
