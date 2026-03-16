@@ -66,4 +66,12 @@ onUnmounted(() => {
 .btn-container:hover {
   background-color: rgba(204, 0, 0, 0.75);
 }
+.label {
+  position: absolute;
+  top: 5px;
+  left: 8px;
+  font-size: 0.7rem;
+  color: #555;
+  font-weight: bold;
+}
 </style>
