@@ -48,9 +48,15 @@ onUnmounted(() => {
 
   background-color: rgba(255, 68, 68, 0.69);
   color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
+
+  min-width: 100px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
   margin: 5px;
