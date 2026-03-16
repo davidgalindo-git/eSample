@@ -58,6 +58,25 @@ export const usePlayer = defineStore("player", {
             }
         },
 
+        stopAll(){
+            this.stop()
+            this.activeAudios.forEach(audio => {
+                audio.stop();
+                audio.src = ""
+                audio.remove()
+            });
+            this.activeAudios = [];
+            this.playing = false;
+            console.log("All instances stopped")
+        },
+
+        addAudio(audio){
+            this.activeAudios.push(audio);
+            audio.onended = () => {
+                this.activeAudios = this.activeAudios.filter(a => a !== audio)
+            }
+        },
+
         // toggle play/pause function
         togglePlay(sample){
             if (this.isPlaying(sample.id)) {
