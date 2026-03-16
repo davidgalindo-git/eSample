@@ -63,7 +63,7 @@ onUnmounted(() => {
   transition: all 0.1s ease;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
-.stop-btn:hover {
-  background-color: #cc0000;
+.btn-container:hover {
+  background-color: rgba(204, 0, 0, 0.75);
 }
 </style>
