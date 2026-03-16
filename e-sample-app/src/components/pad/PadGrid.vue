@@ -2,6 +2,8 @@
 import {usePadStore} from "../../stores/padStore.js";
 
 import Pad from "./Pad.vue";
+import AudioKillButton from "./AudioKillButton.vue";
+import {usePlayer} from "../../stores/player.js";
 
 const padStore = usePadStore();
 
