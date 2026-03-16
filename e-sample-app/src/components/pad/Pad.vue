@@ -34,6 +34,14 @@ const playPreview = () => {
   }
 }
 
+const handleKeyDown = (e) => {
+  if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+  if (e.key === String(props.index + 1)) {
+    playPreview();
+  }
+};
+
 watch(() => props.sample, (newSample) => {
   if (newSample) {
     console.log(`Pad #${props.index} got sample :`, newSample.name);
