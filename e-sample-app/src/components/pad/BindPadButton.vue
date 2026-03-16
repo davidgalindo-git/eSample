@@ -7,13 +7,19 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['toggle-pad-pop-up'])
+
+const handleToggle = () => {
+  emit('toggle-pad-pop-up')
+}
 </script>
 
 <template>
   <button
       class="bind-pad-button"
-      @click.stop="emit('toggle-pad-pop-up')"
+      type="button"
+      @click.stop="handleToggle"
       :class="{ 'is-active': isPadPopUp }"
+      :title="isPadPopUp ? 'Close assignment' : 'Assign to Pad'"
   >
     {{ isPadPopUp ? 'x' : '+'}}
   </button>

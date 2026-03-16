@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, watch} from "vue";
+import {computed, onMounted, onUnmounted, watch} from "vue";
 
 const props = defineProps({
   sample: {
@@ -23,12 +23,26 @@ const playPreview = () => {
     const audioUrl = props.sample.previews['preview-lq-mp3']
     const audio = new Audio(audioUrl)
 
+    audio.onended = () => {
+      audio.remove()
+    };
+
     audio.play().catch(err => console.error("Play preview error", err))
     console.log("Playing: ", audioUrl)
   } else {
     console.error("No sample assigned to pad #", props.index + 1)
   }
 }
+
+const handleKeyDown = (e) => {
+  if (e.repeat) return
+
+  if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+  if (e.key === String(props.index + 1)) {
+    playPreview();
+  }
+};
 
 watch(() => props.sample, (newSample) => {
   if (newSample) {
@@ -37,10 +51,12 @@ watch(() => props.sample, (newSample) => {
 });
 
 onMounted(() => {
-  window.addEventListener("keydown", (e) => {
-    if (e.key === String(props.index + 1)) playPreview();
-  });
+  window.addEventListener("keydown", handleKeyDown);
 })
+
+onUnmounted(() => {
+  window.removeEventListener("keydown", handleKeyDown);
+});
 </script>
 
 <template>

@@ -1,14 +1,20 @@
 <script setup>
 const props = defineProps({
   isVisible: {
+    // Flag: Determines if the pad is being displayed or not
     type: Boolean,
-    required: true
+    default: false
   }
 })
 
 const emit = defineEmits(['toggle-display']);
 
 const toggleDisplay = () => {
+  // Error Guard: prevent props type error
+  if (typeof props.isVisible !== 'boolean') {
+    console.error("TypeError : isVisible must be a boolean.");
+    return
+  }
   emit("toggle-display", !props.isVisible);
 }
 </script>
@@ -17,10 +23,10 @@ const toggleDisplay = () => {
   <button
       type="button"
       class="btn"
-      :class="props.isVisible ? 'btn-danger' : 'btn-primary'"
+      :class="isVisible ? 'btn-danger' : 'btn-primary'"
       @click="toggleDisplay"
   >
-    {{ props.isVisible ? "Hide Pad" : "Show Pad" }}
+    {{ isVisible ? "Hide Pad" : "Show Pad" }}
   </button>
 </template>
 

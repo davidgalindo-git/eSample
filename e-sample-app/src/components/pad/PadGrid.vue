@@ -2,24 +2,47 @@
 import {usePadStore} from "../../stores/padStore.js";
 
 import Pad from "./Pad.vue";
+import AudioKillButton from "./AudioKillButton.vue";
+import {usePlayer} from "../../stores/player.js";
 
+const playerStore = usePlayer();
 const padStore = usePadStore();
+
+const getPadProps = (visualIndex) => {
+  // Function: Returns props for "Pad" component
+  const dataIndex = padStore.getPadIndex(visualIndex);
+  const padData = padStore.getPadData(dataIndex);
+
+  return {
+    sample: padData?.sample || null,
+    index: dataIndex,
+    alias: padData?.alias || padData?.sample?.name || ""
+  }
+}
+
+const stopPads = () => {
+  playerStore.stop()
+}
+
 console.log("Pad container pads:", padStore.assignedPads)
 </script>
 
 <template>
-  <div class="pad-grid">
-    <div class="pad-wrapper"
-         v-for="i in padStore.totalPads"
-         :key="i"
-    >
-      <Pad
-          :sample="padStore.getPadData(padStore.getPadIndex(i))?.sample || null"
-          :index="padStore.getPadIndex(i)"
-          :alias="padStore.getPadData(padStore.getPadIndex(i))?.alias
-          || padStore.getPadData(padStore.getPadIndex(i))?.sample?.name || ''"
-      />
+  <div class="container"  v-if="padStore.totalPads > 0">
+    <div class="pad-grid">
+      <div class="pad-wrapper"
+           v-for="i in padStore.totalPads"
+           :key="i"
+      >
+        <Pad v-bind="getPadProps(i)"/>
+      </div>
     </div>
+    <AudioKillButton
+        @stop="stopPads"
+    />
+  </div>
+  <div v-else class="error-msg">
+    No pads available. Please load kit or bind samples to pads.
   </div>
 </template>
 
@@ -38,5 +61,10 @@ console.log("Pad container pads:", padStore.assignedPads)
 .pad-wrapper{
   width: 100%;
   height: 100%;
+}
+.error-msg {
+  color: #ff4444;
+  padding: 20px;
+  text-align: center;
 }
 </style>

@@ -4,7 +4,9 @@ import {usePadStore} from "../../stores/padStore.js";
 const props = defineProps({
   sample: {
     type: Object,
-    required: true
+    required: true,
+    // Error Guard: ensure the sample actually has data
+    validator: (s) => s.id && (s.name || s.username)
   }
 })
 
@@ -12,22 +14,45 @@ const emit = defineEmits(['close-pop-up'])
 const padStore = usePadStore()
 
 const handleAssign = (visualPos) => {
+  // Function: Assigns sample to pad
   const logicIndex = padStore.getPadIndex(visualPos)
-  padStore.assignSampleToPad(props.sample, logicIndex, props.sample.name)
+  const existingData = padStore.getPadData(logicIndex)
+
+  // Error Guard: Confirmation if pad is already used
+  if (existingData && !confirm(`Overwrite ${existingData.alias}: ${existingData.sample.name}?`)) {
+    return;
+  }
+
+  // Safety: Ensure pad has a fallback name
+  const sampleName = props.sample.name || `Sample #${props.sample.id}`;
+
+  padStore.assignSampleToPad(props.sample, logicIndex, sampleName)
 
   emit('close-pop-up')
 }
 
+const getTitle = (visualPos) => {
+  const logicIndex = padStore.getPadIndex(visualPos)
+  const data = padStore.getPadData(logicIndex)
+
+  if (!data) return "Empty Pad"
+
+  const alias = data.alias
+  const name = data.sample.name
+
+  return alias && alias !== name ? `${alias} (${name})` : name
+}
 </script>
 
 <template>
-  <div class="pad-pop-up">
+  <div class="pad-pop-up" v-if="padStore.totalPads > 0">
     <div class="mini-grid">
       <button
         v-for="i in padStore.totalPads"
         :key="i"
         class="mini-pad"
         :class="{ 'is-occupied': padStore.getPadData(padStore.getPadIndex(i)) }"
+        :title="getTitle(i)"
         @click="handleAssign(i)"
       >
        {{ padStore.getPadIndex(i) + 1}}
