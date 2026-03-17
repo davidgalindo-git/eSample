@@ -46,7 +46,7 @@ onUnmounted(() => {
 .btn-container {
   position: relative;
 
-  background-color: rgba(255, 68, 68, 0.69);
+  background-color: rgba(255, 68, 68, 0.82);
   color: white;
 
   min-width: 100px;
