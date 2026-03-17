@@ -45,16 +45,25 @@ onMounted(() => {
         </div>
       </div>
     </header>
-    <div class="container">
-      <div class="container-item pad">
+    <div class="container"
+         :class="{
+            'has-pad': isPadVisible,
+            'has-likes': isLikesVisible,
+            'has-research': sampleStore.samples.value.length > 0,
+            'only-research': !isPadVisible && !isLikesVisible && sampleStore.samples.value.length > 0,
+            'only-pad': isPadVisible && !isLikesVisible && sampleStore.samples.value.length === 0,
+            'only-likes': !isPadVisible && isLikesVisible && sampleStore.samples.value.length === 0,
+         }"
+    >
+      <div class="container-item pad" v-show="isPadVisible">
         <PadGrid :pads="padStore.assignedPads" v-show="isPadVisible" />
       </div>
 
-      <div class="container-tiem likes">
+      <div class="container-tiem likes" v-show="isLikesVisible">
         <LikedSamplesList v-show="isLikesVisible"/>
       </div>
 
-      <div class="container-item research">
+      <div class="container-item research" v-show="!isPadVisible || !isLikesVisible ||sampleStore.samples.value.length > 0">
 <!--         <p>Nb of samples: {{ sampleStore.samples.value.length }}</p> -->
         <SampleContainer :samples="sampleStore.samples.value"/>
       </div>
@@ -63,6 +72,88 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.container {
+  display: grid;
+  gap: 10px;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  grid-template-columns: 1fr;
+  grid-template-areas: "pad" "likes" "research";
+}
+
+.container.only-pad,
+.container.only-likes,
+.container.only-research {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (min-width: 900px) {
+  /* 1: pad + research + likes */
+  .container.has-pad.has-research.has-likes{
+    grid-template-columns: 450px 1fr;
+    grid-template-areas:
+      "pad likes"
+      "pad research";
+  }
+  /* 2: pad + research */
+  .container.has-pad:not(.has-likes){
+    grid-template-columns: 450px 1.5fr;
+    grid-template-areas: "pad research";
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  /* 3: likes + research */
+  .container.has-likes.has-research:not(.has-pad){
+    grid-template-columns: 1.5fr 1.5fr;
+    grid-template-areas: "likes research";
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  /* 4: pad + likes */
+  .container.has-pad.has-likes{
+    grid-template-columns: 450px 1.5fr;
+    grid-template-areas: "pad likes";
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1300px) {
+  /* 1: pad + research + likes */
+  .container.has-pad.has-research.has-likes {
+    grid-template-columns: 450px 1fr 1fr;
+    grid-template-areas: "pad likes research";
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  /* 2: pad + research */
+  .container.has-pad.has-research:not(.has-likes){
+    grid-template-columns: 450px 1.5fr;
+    grid-template-areas: "pad research";
+    margin: 0 auto;
+  }
+  /* 3: likes + research */
+  .container.has-likes:not(.has-pad){
+    grid-template-columns: 1.5fr 1.5fr;
+    grid-template-areas: "likes research";
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  /* 4: pad + likes */
+  .container.has-pad.has-likes{
+    grid-template-columns: 450px 1.5fr;
+    grid-template-areas: "pad likes";
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
 h1{
   top: 0;
   position: static;
@@ -74,8 +165,8 @@ h1{
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  margin-bottom: 0;
+  padding: 0;
+  margin-bottom: 10px;
 }
 
 .top-actions {
@@ -93,7 +184,6 @@ h1{
 
 .search-bar{
   grid-area: search;
-
 }
 
 .show-buttons {
@@ -102,45 +192,10 @@ h1{
   gap: 10px;
   justify-content: center;
 }
-.container {
-  display: grid;
-  gap: 10px;
-  padding: 0;
-  width: 100%;
-  max-width: 100vw;
-  box-sizing: border-box;
 
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "pad"
-    "likes"
-    "research";
-}
-
-.pad { grid-area: pad;}
+.pad { grid-area: pad;  max-width: 450px; }
 .likes { grid-area: likes;}
 .research { grid-area: research;}
-
-@media (min-width: 900px) {
-  .container {
-    grid-template-columns: 450px 1fr;
-    grid-template-areas:
-      "pad likes"
-      "pad research";
-  }
-}
-
-@media (min-width: 1300px) {
-  .container {
-    grid-template-columns: 450px 1fr 1fr;
-    grid-template-areas:
-        "pad likes research";
-
-    max-width: 1600px;
-    margin: 0 auto;
-    gap: 10px;
-  }
-}
 
 .container-item {
   display: flex;
