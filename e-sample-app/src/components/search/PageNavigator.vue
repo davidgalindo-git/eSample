@@ -33,10 +33,12 @@ const handleInputPage = (event) => {
   <div class="pagination-controls"
   >
     <button
+        class="icon-btn"
         :disabled="currentPage <= 1"
         @click="previousPage"
+        title="Previous Page"
     >
-      Previous
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
     </button>
 
     <span>
@@ -56,10 +58,12 @@ const handleInputPage = (event) => {
     </span>
 
     <button
+        class="icon-btn"
         :disabled="currentPage >= totalPages"
         @click="nextPage"
+        title="Next Page"
     >
-      Next
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
     </button>
   </div>
 </template>
@@ -69,7 +73,17 @@ const handleInputPage = (event) => {
   margin-bottom: 10px;
 }
 button {
-  margin-right: 20px;
+  margin-right: 10px;
   margin-left: 20px;
+}
+.icon-btn {
+  padding: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.icon-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 </style>
