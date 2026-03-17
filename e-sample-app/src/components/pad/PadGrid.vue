@@ -61,7 +61,7 @@ console.log("Pad container pads:", padStore.assignedPads)
   flex-direction: column;
   align-items: center;
   margin: 0;
-  padding: 10px;
+  padding: 0 10px 10px;
   max-width: 500px;
 }
 .pad-grid{
@@ -72,7 +72,6 @@ console.log("Pad container pads:", padStore.assignedPads)
   width: 100%;
   max-width: 500px;
   aspect-ratio: 1/1;
-  margin-top: 20px;
   margin-bottom: 20px;
 }
 .pad-wrapper{
