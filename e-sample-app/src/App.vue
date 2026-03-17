@@ -59,7 +59,7 @@ onMounted(() => {
         <PadGrid :pads="padStore.assignedPads" v-show="isPadVisible" />
       </div>
 
-      <div class="container-tiem likes" v-show="isLikesVisible">
+      <div class="container-item likes" v-show="isLikesVisible">
         <LikedSamplesList v-show="isLikesVisible"/>
       </div>
 
@@ -79,7 +79,10 @@ onMounted(() => {
   width: 100%;
   max-width: 100%;
   grid-template-columns: 1fr;
-  grid-template-areas: "pad" "likes" "research";
+  grid-template-areas:
+      "pad"
+      "likes"
+      "research";
 }
 
 .container.only-pad,
@@ -119,7 +122,7 @@ onMounted(() => {
   .container.has-pad.has-likes{
     grid-template-columns: 450px 1.5fr;
     grid-template-areas: "pad likes";
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 }
@@ -149,7 +152,7 @@ onMounted(() => {
   .container.has-pad.has-likes{
     grid-template-columns: 450px 1.5fr;
     grid-template-areas: "pad likes";
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 }
