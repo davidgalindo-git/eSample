@@ -9,6 +9,7 @@ export const usePlayer = defineStore("player", {
         currentTime: 0,
         duration: 0,
         currentSample: null,
+        activeAudios: []
     }),
 
     getters: {
@@ -55,6 +56,25 @@ export const usePlayer = defineStore("player", {
                 this.audio.currentTime = 0; // reset time elapsed to 0
                 this.playing = false;
                 this.currentSample = null; // reset current sample
+            }
+        },
+
+        stopAll(){
+            this.stop()
+            this.activeAudios.forEach(audio => {
+                audio.stop();
+                audio.src = ""
+                audio.remove()
+            });
+            this.activeAudios = [];
+            this.playing = false;
+            console.log("All instances stopped")
+        },
+
+        addAudio(audio){
+            this.activeAudios.push(audio);
+            audio.onended = () => {
+                this.activeAudios = this.activeAudios.filter(a => a !== audio)
             }
         },
 

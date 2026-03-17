@@ -21,7 +21,7 @@ const getPadProps = (visualIndex) => {
 }
 
 const stopAudio = () => {
-  playerStore.stop()
+  playerStore.stopAll()
 }
 
 console.log("Pad container pads:", padStore.assignedPads)
@@ -29,17 +29,20 @@ console.log("Pad container pads:", padStore.assignedPads)
 
 <template>
   <div class="container"  v-if="padStore.totalPads > 0">
-    <div class="pad-grid">
-      <div class="pad-wrapper"
-           v-for="i in padStore.totalPads"
-           :key="i"
-      >
-        <Pad v-bind="getPadProps(i)"/>
+    <div class="grid-layout">
+      <div class="pad-grid">
+        <div class="pad-wrapper"
+             v-for="i in padStore.totalPads"
+             :key="i"
+        >
+          <Pad v-bind="getPadProps(i)"/>
+        </div>
       </div>
+      <AudioKillButton
+          @stop="stopAudio"
+          class="stop-btn"
+      />
     </div>
-    <AudioKillButton
-        @stop="stopAudio"
-    />
   </div>
   <div v-else class="error-msg">
     No pads available. Please load kit or bind samples to pads.
@@ -47,6 +50,20 @@ console.log("Pad container pads:", padStore.assignedPads)
 </template>
 
 <style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.grid-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0 10px 10px;
+  max-width: 500px;
+}
 .pad-grid{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -55,12 +72,14 @@ console.log("Pad container pads:", padStore.assignedPads)
   width: 100%;
   max-width: 500px;
   aspect-ratio: 1/1;
-  margin-top: 20px;
   margin-bottom: 20px;
 }
 .pad-wrapper{
   width: 100%;
   height: 100%;
+}
+.stop-btn{
+  width: 150px;
 }
 .error-msg {
   color: #ff4444;

@@ -32,27 +32,46 @@ onUnmounted(() => {
 </script>
 
 <template>
-<button
-    @click.stop="handleClick"
-    type="button"
-    class="stop-btn"
->
-  STOP ALL (0)
-</button>
+<div class="btn-container">
+  <span class="label">0</span>
+  <div
+      @mousedown="handleClick"
+  >
+    STOP ALL
+  </div>
+</div>
 </template>
 
 <style scoped>
-.stop-btn {
-  background-color: rgba(255, 68, 68, 0.69);
+.btn-container {
+  position: relative;
+
+  background-color: rgba(255, 68, 68, 0.82);
   color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
+
+  min-width: 100px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
   margin: 5px;
+  transition: all 0.1s ease;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
-.stop-btn:hover {
-  background-color: #cc0000;
+.btn-container:hover {
+  background-color: rgba(204, 0, 0, 0.75);
+}
+.label {
+  position: absolute;
+  top: 5px;
+  left: 8px;
+  font-size: 0.7rem;
+  color: #555;
+  font-weight: bold;
 }
 </style>

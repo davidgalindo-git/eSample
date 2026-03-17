@@ -1,5 +1,6 @@
 <script setup>
 import {computed, onMounted, onUnmounted, watch} from "vue";
+import {usePlayer} from "../../stores/player.js";
 
 const props = defineProps({
   sample: {
@@ -16,6 +17,8 @@ const props = defineProps({
   }
 })
 
+const playerStore = usePlayer()
+
 const hasSample = computed(() => props.sample !== null)
 
 const playPreview = () => {
@@ -23,9 +26,7 @@ const playPreview = () => {
     const audioUrl = props.sample.previews['preview-lq-mp3']
     const audio = new Audio(audioUrl)
 
-    audio.onended = () => {
-      audio.remove()
-    };
+    playerStore.addAudio(audio)
 
     audio.play().catch(err => console.error("Play preview error", err))
     console.log("Playing: ", audioUrl)
@@ -104,7 +105,7 @@ onUnmounted(() => {
   top: 5px;
   left: 8px;
   font-size: 0.7rem;
-  color: #666;
+  color: #888;
   font-weight: bold;
 }
 

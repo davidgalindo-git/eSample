@@ -64,9 +64,9 @@ const handlePadPopUp = () => {
 <style scoped>
 .sample-card{
   padding: 16px;
-  border: 1px solid #ffffff;
-  border-radius: 4px;
-  background-color: #7e7e7e;
+  border: 3px solid #ffffff;
+  border-radius: 10px;
+  background-color: #b8b8b8;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
