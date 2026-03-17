@@ -22,7 +22,7 @@ watch(() => liked.likedList, (newList) => {
 
 <template>
 <div>
-  <p>Liked samples: {{ liked.likedList.length }} {{ liked.likedList }}</p>
+<!--  <p>Liked samples: {{ liked.likedList.length }} {{ liked.likedList }}</p>-->
   <SampleContainer :samples="sampleStore.likedSamples.value"/>
 </div>
  </template>
