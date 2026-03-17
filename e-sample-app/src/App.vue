@@ -203,9 +203,4 @@ h1{
   min-width: 0;
   width: 100%;
 }
-
-:deep(.pad-grid) {
-  width: 100%;
-  max-width: 100%;
-}
 </style>
