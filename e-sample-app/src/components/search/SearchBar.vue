@@ -23,8 +23,17 @@ const submitKeyword = async () => {
   }
 }
 
-const handleChangePage = (newPage) => {
-  sampleStore.searchSamples(sampleStore.currentQuery.value, newPage)
+const handleChangePage = async (newPage) => {
+  if (isLoading.value) return
+
+  isLoading.value = true
+  try {
+    await sampleStore.searchSamples(sampleStore.currentQuery.value, newPage)
+  } catch(err){
+    error.value = "Erreur lors du changement de page."
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>
 
