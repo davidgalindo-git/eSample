@@ -28,7 +28,12 @@ const nextPage = () => {
 };
 
 const handleInputPage = (event) => {
-  const targetPage = Number(event.target.value);
+  let targetPage = parseInt(event.target.value, 10);
+
+  if (isNaN(targetPage)) {
+    event.target.value = props.currentPage;
+    return;
+  }
 
   if (targetPage >= 1 && targetPage <= props.totalPages) {
     emit('changePage', targetPage)
