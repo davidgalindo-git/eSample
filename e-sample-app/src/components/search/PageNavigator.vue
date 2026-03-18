@@ -35,8 +35,11 @@ const handleInputPage = (event) => {
     return;
   }
 
-  if (targetPage >= 1 && targetPage <= props.totalPages) {
-    emit('changePage', targetPage)
+  if (targetPage < 1) targetPage = 1;
+  if (targetPage > props.totalPages) targetPage = props.totalPages;
+
+  if (targetPage !== props.currentPage) {
+    emit('changePage', targetPage);
   } else {
     event.target.value = props.currentPage
   }
