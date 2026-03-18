@@ -1,7 +1,16 @@
 <script setup>
 const props = defineProps({
-  currentPage: Number,
-  totalPages: Number
+  currentPage: {
+    type: Number,
+    required: true,
+    validator: (v) => v >= 0
+  },
+  totalPages: {
+    type: Number,
+    required: true,
+    default: 1,
+    validator: (v) => v >= 0
+  }
 })
 
 const emit = defineEmits(['changePage'])
