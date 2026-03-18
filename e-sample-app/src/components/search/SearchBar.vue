@@ -6,29 +6,63 @@ import PageNavigator from "./PageNavigator.vue";
 const sampleStore = useSampleAPI()
 const keyword = ref('')
 
+const isLoading = ref(false)
+const error = ref(null)
+
 const submitKeyword = async () => {
-  await sampleStore.searchSamples(keyword.value)
+  isLoading.value = true
+  error.value = null
+
+  try {
+    await sampleStore.searchSamples(keyword.value)
+  } catch (err) {
+    error.value = "Couldn't fetch samples. Verify your connection."
+    console.error(err)
+  } finally {
+    isLoading.value = false
+  }
 }
 
-const handleChangePage = (newPage) => {
-  sampleStore.searchSamples(sampleStore.currentQuery.value, newPage)
+const handleChangePage = async (newPage) => {
+  if (isLoading.value) return
+
+  isLoading.value = true
+  try {
+    await sampleStore.searchSamples(sampleStore.currentQuery.value, newPage)
+  } catch(err){
+    error.value = "Erreur lors du changement de page."
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>
 
 <template>
   <div class="search-container">
-    <input
-        v-model="keyword"
-        placeholder="Search samples"
-        @keyup.enter="submitKeyword"
-    />
-    <button @click="submitKeyword">Search</button>
+    <div class="search-bar">
+      <input
+          v-model="keyword"
+          placeholder="Search samples"
+          @keyup.enter="submitKeyword"
+      />
+      <button @click="submitKeyword" :disabled="isLoading">
+        {{ isLoading ? 'Searching...' : 'Search' }}
+      </button>
+    </div>
+
+    <p v-if="error" class="error-msg">{{ error }}</p>
+
+    <p v-if="!isLoading && sampleStore.samples.value.length === 0 && sampleStore.currentQuery.value" class="error-msg">
+      No samples found for "{{ sampleStore.currentQuery.value }}".
+    </p>
+
     <PageNavigator
+      v-if="sampleStore.totalPages.value > 1"
       :current-page="sampleStore.currentPage.value"
       :totalPages="sampleStore.totalPages.value"
       @change-page="handleChangePage"
     />
-    <p v-if="keyword !== ''">keyword: {{ keyword }}</p>
+<!--    <p v-if="keyword !== ''">keyword: {{ keyword }}</p>-->
   </div>
 </template>
 
@@ -40,5 +74,21 @@ button {
 .search-container {
   margin-top: 20px;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error-msg {
+  color: #ff4444;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+input:disabled, button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>

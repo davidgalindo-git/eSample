@@ -1,7 +1,16 @@
 <script setup>
 const props = defineProps({
-  currentPage: Number,
-  totalPages: Number
+  currentPage: {
+    type: Number,
+    required: true,
+    validator: (v) => v >= 0
+  },
+  totalPages: {
+    type: Number,
+    required: true,
+    default: 1,
+    validator: (v) => v >= 0
+  }
 })
 
 const emit = defineEmits(['changePage'])
@@ -19,10 +28,18 @@ const nextPage = () => {
 };
 
 const handleInputPage = (event) => {
-  const targetPage = Number(event.target.value);
+  let targetPage = parseInt(event.target.value, 10);
 
-  if (targetPage >= 1 && targetPage <= props.totalPages) {
-    emit('changePage', targetPage)
+  if (isNaN(targetPage)) {
+    event.target.value = props.currentPage;
+    return;
+  }
+
+  if (targetPage < 1) targetPage = 1;
+  if (targetPage > props.totalPages) targetPage = props.totalPages;
+
+  if (targetPage !== props.currentPage) {
+    emit('changePage', targetPage);
   } else {
     event.target.value = props.currentPage
   }
@@ -41,7 +58,7 @@ const handleInputPage = (event) => {
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
     </button>
 
-    <span>
+    <span v-if="totalPages > 0">
       Page
       <input
           :key="currentPage"
@@ -51,11 +68,13 @@ const handleInputPage = (event) => {
           @keyup.enter="handleInputPage"
           @focus="$event.target.select()"
           style="width: 7ch; text-align: center"
+          inputmode="numeric"
           min="1"
           :max="totalPages"
       >
       / {{ totalPages }}
     </span>
+    <span v-else>No results</span>
 
     <button
         class="icon-btn"
