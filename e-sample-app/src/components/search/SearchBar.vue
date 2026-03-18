@@ -35,7 +35,9 @@ const handleChangePage = (newPage) => {
         placeholder="Search samples"
         @keyup.enter="submitKeyword"
     />
-    <button @click="submitKeyword">Search</button>
+    <button @click="submitKeyword" :disabled="isLoading">
+      {{ isLoading ? 'Searching...' : 'Search' }}
+    </button>
     <PageNavigator
       :current-page="sampleStore.currentPage.value"
       :totalPages="sampleStore.totalPages.value"
