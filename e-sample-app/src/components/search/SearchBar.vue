@@ -6,8 +6,21 @@ import PageNavigator from "./PageNavigator.vue";
 const sampleStore = useSampleAPI()
 const keyword = ref('')
 
+const isLoading = ref(false)
+const error = ref(null)
+
 const submitKeyword = async () => {
-  await sampleStore.searchSamples(keyword.value)
+  isLoading.value = true
+  error.value = null
+
+  try {
+    await sampleStore.searchSamples(keyword.value)
+  } catch (err) {
+    error.value = "Couldn't fetch samples. Verify your connection."
+    console.error(err)
+  } finally {
+    isLoading.value = false
+  }
 }
 
 const handleChangePage = (newPage) => {
