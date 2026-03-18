@@ -30,7 +30,7 @@ const handleChangePage = (newPage) => {
 
 <template>
   <div class="search-container">
-    <div>
+    <div class="search-bar">
       <input
           v-model="keyword"
           placeholder="Search samples"
@@ -43,7 +43,7 @@ const handleChangePage = (newPage) => {
 
     <p v-if="error" class="error-msg">{{ error }}</p>
 
-    <p v-if="!isLoading && sampleStore.samples.value.length === 0 && sampleStore.currentQuery.value">
+    <p v-if="!isLoading && sampleStore.samples.value.length === 0 && sampleStore.currentQuery.value" class="error-msg">
       No samples found for "{{ sampleStore.currentQuery.value }}".
     </p>
 
@@ -65,5 +65,21 @@ button {
 .search-container {
   margin-top: 20px;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error-msg {
+  color: #ff4444;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+input:disabled, button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>
