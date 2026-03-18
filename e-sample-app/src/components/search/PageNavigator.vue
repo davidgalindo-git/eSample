@@ -68,6 +68,7 @@ const handleInputPage = (event) => {
           @keyup.enter="handleInputPage"
           @focus="$event.target.select()"
           style="width: 7ch; text-align: center"
+          inputmode="numeric"
           min="1"
           :max="totalPages"
       >
