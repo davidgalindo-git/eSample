@@ -30,20 +30,30 @@ const handleChangePage = (newPage) => {
 
 <template>
   <div class="search-container">
-    <input
-        v-model="keyword"
-        placeholder="Search samples"
-        @keyup.enter="submitKeyword"
-    />
-    <button @click="submitKeyword" :disabled="isLoading">
-      {{ isLoading ? 'Searching...' : 'Search' }}
-    </button>
+    <div>
+      <input
+          v-model="keyword"
+          placeholder="Search samples"
+          @keyup.enter="submitKeyword"
+      />
+      <button @click="submitKeyword" :disabled="isLoading">
+        {{ isLoading ? 'Searching...' : 'Search' }}
+      </button>
+    </div>
+
+    <p v-if="error" class="error-msg">{{ error }}</p>
+
+    <p v-if="!isLoading && sampleStore.samples.value.length === 0 && sampleStore.currentQuery.value">
+      No samples found for "{{ sampleStore.currentQuery.value }}".
+    </p>
+
     <PageNavigator
+      v-if="sampleStore.totalPages.value > 1"
       :current-page="sampleStore.currentPage.value"
       :totalPages="sampleStore.totalPages.value"
       @change-page="handleChangePage"
     />
-    <p v-if="keyword !== ''">keyword: {{ keyword }}</p>
+<!--    <p v-if="keyword !== ''">keyword: {{ keyword }}</p>-->
   </div>
 </template>
 
