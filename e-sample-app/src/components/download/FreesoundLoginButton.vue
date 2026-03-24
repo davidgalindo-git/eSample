@@ -31,5 +31,26 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-
+.auth-container {
+  left: 0;
+}
+.logged-out-dot{
+    height: 10px;
+    width: 10px;
+    background-color: #ff1f1f;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+}
+.logged-in-dot {
+  height: 10px;
+  width: 10px;
+  background-color: #44ff44;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+}
+.btn-logout {
+  opacity: 0.7;
+}
 </style>
