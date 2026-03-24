@@ -34,10 +34,10 @@ onMounted(() => {
 
 <template>
   <div id="app">
+    <FreesoundLoginButton class="login-btn" />
     <header class="container-top">
       <h1>eSample</h1>
       <div class="top-actions">
-        <FreesoundLoginButton class="login-btn" />
         <SearchBar class="search-bar" />
         <div class="show-buttons">
           <ShowPadButton :is-visible="isPadVisible" @toggle-display="togglePad" />
@@ -183,7 +183,9 @@ h1{
   align-items: center;
 }
 
-.login-btn{ grid-area: login }
+.login-btn{
+  text-align: left;
+}
 
 .search-bar{
   grid-area: search;
