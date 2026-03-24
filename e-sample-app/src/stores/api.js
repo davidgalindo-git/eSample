@@ -1,5 +1,7 @@
 import {ref} from "vue";
 
+const token = ref(localStorage.getItem("fs_token"));
+
 export const useFreesoundAuth = () => {
     // freesound API vars
     const freesoundURL = `https://freesound.org/apiv2/`
