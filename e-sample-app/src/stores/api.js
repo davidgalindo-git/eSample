@@ -15,6 +15,13 @@ export const useFreesoundAuth = () => {
         window.location.href = url; // user is redirected to freesound's page
     };
 
+    const logout = () => {
+        localStorage.removeItem("fs_token");
+        localStorage.removeItem("fs_refresh_token");
+        token.value = null;
+        console.log("Logged out and cleared tokens");
+    };
+
     const getToken = async () => {
         const code = new URLSearchParams(window.location.search).get("code")
         if (code) {
