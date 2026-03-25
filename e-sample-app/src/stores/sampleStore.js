@@ -78,29 +78,41 @@ export const useSampleAPI = () => {
         loading.value = true
         try {
             // URL with download query containing sample ID
-            const url = `${freesoundURL}sounds/${sampleId}/download/`
+            const fetchUrl = `${freesoundURL}sounds/${sampleId}/`
+            const downloadUrl = `${fetchUrl}download/`
             const fsToken = localStorage.getItem("fs_token")
 
             // raise error if token hasn't been claimed
             if (!fsToken) {
-                console.error("Could not find freesound token, get a token by clicking on 'Get a Freesound Token'")
+                console.error("Could not find freesound token, get a token by clicking on 'Connect to Freesound'")
                 return
             }
 
+            const response = await fetch(`${fetchUrl}?fields=name,type`, {
+                headers: { 'Authorization': `Bearer ${fsToken}` }
+            });
+            const soundData = await response.json();
+
             // fetch download url with user's auth token as header
-            const res = await fetch(url, {
+            const res = await fetch(downloadUrl, {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${fsToken}`
                 }
             })
 
-            if (res.status === 401) {
-                throw new Error("Token expiré ou invalide (401)");
-            }
+            if (!res.ok) throw new Error(`Erreur HTTP: ${res.status}`);
 
             // convert audio data to blob: Binary Large Object
             const blob = await res.blob()
+
+            const extension = soundData.type || 'wav';
+            let fileName = soundData.name.replace(/[/\\?%*:|"<>]/g, '-');
+
+            const hasExtension = fileName.toLowerCase().endsWith(`.${extension.toLowerCase()}`);
+            if (!hasExtension) {
+                fileName = `${fileName}.${extension}`;
+            }
 
             // create temporary url to stock large audio file
             const blobUrl = window.URL.createObjectURL(blob);
@@ -110,7 +122,7 @@ export const useSampleAPI = () => {
             link.href = blobUrl;
 
             // download attribute forces download request instead of web navigation
-            link.download = `freesound-${sampleId}.wav`; // set audio file name
+            link.download = fileName // set audio file name
 
             // inject link inside web page
             document.body.appendChild(link);
